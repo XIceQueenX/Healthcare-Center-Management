@@ -10,9 +10,9 @@ namespace Gestao_Centro_Saude.models
     {
 
         public Patient(int id, string name, string mobilePhone, char gender, Category category, List<Exam>? userExams = null)
-        : base(id, name, mobilePhone, gender, category) 
+        : base(id, name, mobilePhone, gender, category)
         {
-            UserExams = userExams ?? new List<Exam>(); 
+            UserExams = userExams ?? new List<Exam>();
         }
 
 
@@ -25,6 +25,25 @@ namespace Gestao_Centro_Saude.models
 
             UserExams.Add(exam);
         }
+
+
+
+        /*public List<PatientExam> CheckExamByRange(List<PatientExam> list, string startDate, string endDate)
+        {
+            List<PatientExam> examsInRange = new List<PatientExam>();
+
+            foreach (var exam in list)
+            {
+                if (exam.Date >= startDate && exam.Date <= endDate)
+                {
+                    examsInRange.Add(exam);
+                }
+            }
+
+
+
+            return examsInRange;
+        }*/
 
         //add a check by range
 

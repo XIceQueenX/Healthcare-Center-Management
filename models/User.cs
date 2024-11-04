@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.models
@@ -15,11 +16,20 @@ namespace Gestao_Centro_Saude.models
     }
 
     internal class User
-    {  
+    {
         private char gender;
+        private string mobile_phone;
+
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Mobile_Phone { get; set; }
+        public string Mobile_Phone
+        {
+            get => mobile_phone;
+            set
+            {
+                mobile_phone = Convert.ToInt64(mobile_phone).ToString("###-###-####");
+            }
+        }
         public char Gender
         {
             get => gender;
@@ -36,6 +46,8 @@ namespace Gestao_Centro_Saude.models
             Category = category;
         }
 
-        public User(){}
+
+
+        public User() { }
     }
 }

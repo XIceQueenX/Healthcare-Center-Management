@@ -46,5 +46,6 @@ namespace Gestao_Centro_Saude
                 label1.Text = "No patient found with the specified ID.";
             }
         }
+
     }
 }

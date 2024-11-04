@@ -31,11 +31,12 @@
             addPersonName = new TextBox();
             button1 = new Button();
             label1 = new Label();
+            textBox1 = new TextBox();
             SuspendLayout();
             // 
             // addPersonName
             // 
-            addPersonName.Location = new Point(221, 136);
+            addPersonName.Location = new Point(82, 51);
             addPersonName.Multiline = true;
             addPersonName.Name = "addPersonName";
             addPersonName.Size = new Size(125, 34);
@@ -61,11 +62,21 @@
             label1.TabIndex = 2;
             label1.Text = "label1";
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(82, 91);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(125, 34);
+            textBox1.TabIndex = 3;
+            textBox1.Text = "mobile phoen";
+            // 
             // Clients
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(907, 673);
+            Controls.Add(textBox1);
             Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(addPersonName);
@@ -80,5 +91,6 @@
         private TextBox addPersonName;
         private Button button1;
         private Label label1;
+        private TextBox textBox1;
     }
 }

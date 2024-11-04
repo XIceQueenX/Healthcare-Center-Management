@@ -9,7 +9,7 @@ namespace Gestao_Centro_Saude.models
     internal class Appointment
     {
         public int Id { get; private set; }
-        public DateTime Date { get; set; } 
+        public long Date { get; set; } 
         public Patient Patient { get; set; } 
         public Staff Staff { get; set; } 
         public Exam Exam { get; set; }
