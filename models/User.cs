@@ -17,14 +17,25 @@ namespace Gestao_Centro_Saude.models
     internal class User
     {  
         private char gender;
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public int Mobile_Phone { get; set; }
+        public string Mobile_Phone { get; set; }
         public char Gender
         {
             get => gender;
             set => gender = char.ToUpper(value);
         }
         public Category Category { get; set; }
+
+        public User(int id, string name, string mobilePhone, char gender, Category category)
+        {
+            Id = id;
+            Name = name;
+            Mobile_Phone = mobilePhone;
+            Gender = gender;
+            Category = category;
+        }
+
+        public User(){}
     }
 }

@@ -3,60 +3,48 @@ using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Gestao_Centro_Saude.repository;
+using static System.Net.Mime.MediaTypeNames;
+using System.IO;
 
 
 namespace Gestao_Centro_Saude
 {
-    public partial class Form1 : Form
+    public partial class Clients : Form
     {
-        public Form1()
+        public Clients()
         {
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+            var repo = new PatientRepository();
+
+            List<Patient> patients = repo.GetPatients();
+
+            /*string text = "";
+            foreach (Patient pat in patients)
             {
-                string connectionString = "server=localhost;database=healthcare_center;user=root;password=root;";
-
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-
-                    string query = "SELECT User.name, User.Mobile_Phone, User.Gender " +
-                                     "FROM User " +
-                                     "INNER JOIN Patient ON User.id = Patient.id " +
-                                     "LIMIT 1";
-
-                    MySqlCommand command = new MySqlCommand(query, connection);
-
-                    MySqlDataReader reader = command.ExecuteReader();
-                        
-                            if (reader.Read())
-                            {
-                                Patient patient = new Patient
-                                {
-                                    Name = reader["name"].ToString(),
-                                    Mobile_Phone = reader["Mobile_Phone"].ToString(),
-                                    Gender = Convert.ToChar(reader["Gender"]),
-                                };
-
-                                label1.Text = $"Name: {patient.Name}\n" +
-                                              $"Mobile Phone: {patient.Mobile_Phone}\n" +
-                                              $"Gender: {patient.Gender}\n";
-                            }
-                           
-                        
-                    
-                }
+                text += $"Name: {pat.Name}\n" +
+                                              $"Mobile Phone: {pat.Mobile_Phone}\n" +
+                                              $"Gender: {pat.Gender}\n";
             }
-            catch (MySqlException ex)
+
+            label1.Text = text;*/
+
+
+            Patient pat = repo.GetPatient(2);
+            if (pat != null)
             {
-                MessageBox.Show($"Database error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                label1.Text = $"Name: {pat.Name}\n" +
+                              $"Mobile Phone: {pat.Mobile_Phone}\n" +
+                              $"Gender: {pat.Gender}\n";
+            }
+            else
+            {
+                label1.Text = "No patient found with the specified ID.";
             }
         }
-    
-
     }
 }

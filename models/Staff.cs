@@ -19,8 +19,14 @@ namespace Gestao_Centro_Saude.models
 
     internal class Staff:User
     {
-        public int Id { get; private set; }
-        public MedicalSpecialty Specialty { get; set; }        
-       
+
+        public MedicalSpecialty Specialty { get; set; }
+
+        public Staff(int id, string name, string mobilePhone, char gender, Category category, MedicalSpecialty specialty)
+         : base(id, name, mobilePhone, gender, category)
+        {
+            Specialty = specialty; 
+        }
+
     }
 }

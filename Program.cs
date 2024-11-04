@@ -11,7 +11,10 @@ namespace Gestao_Centro_Saude
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new Clients());
         }
     }
 }
+
+
+//CTRl K, CTRL D - AUTO FORMAT

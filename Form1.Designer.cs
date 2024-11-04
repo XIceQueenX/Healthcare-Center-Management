@@ -1,6 +1,6 @@
 ﻿namespace Gestao_Centro_Saude
 {
-    partial class Form1
+    partial class Clients
     {
         /// <summary>
         ///  Required designer variable.
@@ -35,7 +35,7 @@
             // 
             // addPersonName
             // 
-            addPersonName.Location = new Point(23, 12);
+            addPersonName.Location = new Point(221, 136);
             addPersonName.Multiline = true;
             addPersonName.Name = "addPersonName";
             addPersonName.Size = new Size(125, 34);
@@ -44,7 +44,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(186, 21);
+            button1.Location = new Point(391, 141);
             button1.Name = "button1";
             button1.Size = new Size(94, 29);
             button1.TabIndex = 1;
@@ -55,22 +55,22 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(296, 22);
+            label1.Location = new Point(417, 173);
             label1.Name = "label1";
             label1.Size = new Size(50, 20);
             label1.TabIndex = 2;
             label1.Text = "label1";
             // 
-            // Form1
+            // Clients
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(907, 673);
             Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(addPersonName);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "Clients";
+            Text = "Clients";
             ResumeLayout(false);
             PerformLayout();
         }
