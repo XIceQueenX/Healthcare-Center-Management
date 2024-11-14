@@ -59,7 +59,6 @@ namespace Gestao_Centro_Saude.repository
             Patient patient = null;
             List<Exam> userExams = new List<Exam>();
 
-
             try
             {
                 using (MySqlConnection connection = CreateConnection())

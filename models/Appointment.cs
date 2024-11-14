@@ -14,5 +14,26 @@ namespace Gestao_Centro_Saude.models
         public Staff Staff { get; set; } 
         public Exam Exam { get; set; }
         public bool isReturning { get; set; }
+
+
+        public Appointment(int id, long date, Patient patient, Staff staff, Exam exam, bool isReturning)
+        {
+            Id = id;
+            Date = date;
+            Patient = patient;
+            Staff = staff;
+            Exam = exam;
+            isReturning = isReturning;
+        }
+
+        public void RescheduleAppointment(long newDate)
+        {
+            Date = newDate;
+        }
+
+        public void MarkAsReturning()
+        {
+            isReturning = true;
+        }
     }
 }

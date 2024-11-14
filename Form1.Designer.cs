@@ -32,6 +32,8 @@
             button1 = new Button();
             label1 = new Label();
             textBox1 = new TextBox();
+            grid = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)grid).BeginInit();
             SuspendLayout();
             // 
             // addPersonName
@@ -71,17 +73,31 @@
             textBox1.TabIndex = 3;
             textBox1.Text = "mobile phoen";
             // 
+            // grid
+            // 
+            grid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            grid.Location = new Point(96, 281);
+            grid.Name = "grid";
+            grid.RowHeadersWidth = 51;
+            grid.Size = new Size(773, 252);
+            grid.TabIndex = 4;
+            grid.CellContentClick += onClickGridCell;
+            // 
             // Clients
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(907, 673);
+            Controls.Add(grid);
             Controls.Add(textBox1);
             Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(addPersonName);
             Name = "Clients";
             Text = "Clients";
+            Load += Clients_Load;
+            ((System.ComponentModel.ISupportInitialize)grid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -92,5 +108,6 @@
         private Button button1;
         private Label label1;
         private TextBox textBox1;
+        private DataGridView grid;
     }
 }

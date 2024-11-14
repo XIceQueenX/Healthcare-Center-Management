@@ -24,11 +24,8 @@ namespace Gestao_Centro_Saude.models
         public string Name { get; set; }
         public string Mobile_Phone
         {
-            get => mobile_phone;
-            set
-            {
-                mobile_phone = Convert.ToInt64(mobile_phone).ToString("###-###-####");
-            }
+            get ;
+            set;
         }
         public char Gender
         {
@@ -45,8 +42,6 @@ namespace Gestao_Centro_Saude.models
             Gender = gender;
             Category = category;
         }
-
-
 
         public User() { }
     }

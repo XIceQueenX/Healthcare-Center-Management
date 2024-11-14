@@ -26,5 +26,12 @@ namespace Gestao_Centro_Saude.models
         public string Staff { get; set; }
         public string Diagnosis { get; set; }
 
+        public void UpdateDiagnosis(string newDiagnosis)
+        {
+            Diagnosis = newDiagnosis;
+            Console.WriteLine("Success");
+        }
+
+
     }
 }
