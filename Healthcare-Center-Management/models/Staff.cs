@@ -21,11 +21,18 @@ namespace Gestao_Centro_Saude.models
     {
         public MedicalSpecialty Specialty { get; private set; }
 
-        public Staff(int id, string name, string mobilePhone, char gender, Category category, MedicalSpecialty specialty)
-         : base(id, name, mobilePhone, gender, category)
+        public Staff(string name, string mobilePhone, char gender, Category category, MedicalSpecialty specialty)
+         : base( name, mobilePhone, gender, category)
         {
             Specialty = specialty; 
         }
+
+        public Staff(int id, string name, string mobilePhone, char gender, Category category, MedicalSpecialty specialty)
+        : base(id, name, mobilePhone, gender, category)
+        {
+            Specialty = specialty;
+        }
+
         public void UpdateSpecialty(MedicalSpecialty newSpecialty)
         {
             Specialty = newSpecialty;

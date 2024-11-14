@@ -40,19 +40,21 @@ namespace Gestao_Centro_Saude
         private void PatientDetails_Load(object sender, EventArgs e)
         {
             LoadPatientDetails();
+
+            
         }
 
         private void LoadPatientDetails()
         {
-            var repo = new PatientRepository();
-
-            Patient pat = repo.GetPatient(patientId);
+           var pat = Patient.GetPatientById(patientId);
             if (pat != null)
             {
                 label1.Text = $"Name: {pat.Name}\n" +
                               $"Mobile Phone: {pat.Mobile_Phone}\n" +
                               $"Gender: {pat.Gender}\n";
             }
+
+            userExams.DataSource = PatientExam.GetExamsById(patientId);
         }
     }
 }

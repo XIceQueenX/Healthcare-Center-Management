@@ -16,44 +16,17 @@ namespace Gestao_Centro_Saude
         {
             InitializeComponent();
         }
-   
-
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-
-
-
-
-            /*Patient pat = repo.GetPatient(2);
-            if (pat != null)
-            {
-                label1.Text = $"Name: {pat.Name}\n" +
-                              $"Mobile Phone: {pat.Mobile_Phone}\n" +
-                              $"Gender: {pat.Gender}\n";
-            }
-            else
-            {
-                label1.Text = "No patient found with the specified ID.";
-            }*/
+            AddNewUser addNewUser = new AddNewUser();
+            addNewUser.Show();
         }
 
         private void Clients_Load(object sender, EventArgs e)
         {
-            var repo = new PatientRepository();
 
-            List<Patient> patients = repo.GetPatients();
-
-            var patientView = patients.Select(p => new
-            {
-                p.Id,
-                p.Name,
-                p.Mobile_Phone,
-                p.Gender
-            }).ToList();
-
-            grid.DataSource = patientView;
+            grid.DataSource = Patient.GetPatients();
         }
 
         private void onClickGridCell(object sender, DataGridViewCellEventArgs e)
@@ -61,10 +34,20 @@ namespace Gestao_Centro_Saude
             if (e.RowIndex >= 0)
             {
                 var selectedRow = grid.Rows[e.RowIndex];
-                int patientId = (int)selectedRow.Cells["Id"].Value; 
+                int patientId = (int)selectedRow.Cells["Id"].Value;
 
                 PatientDetails.ShowPatientDetails(patientId);
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

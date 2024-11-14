@@ -15,5 +15,10 @@ namespace Gestao_Centro_Saude
             return formattedDate.ToString("F"); 
         }
 
+        public bool isEmptyTextField(string text) {
+            return string.IsNullOrWhiteSpace(text);
+        }
+
+
     }
 }
