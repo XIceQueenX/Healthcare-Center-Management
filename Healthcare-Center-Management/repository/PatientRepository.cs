@@ -37,8 +37,7 @@ namespace Gestao_Centro_Saude.repository
                             id: reader.GetInt32(0),
                             name: reader.GetString(1),
                             mobilePhone: reader.GetString(2),
-                            gender: reader.GetChar(3),
-                            category: Category.Patient
+                            gender: reader.GetChar(3)
                          );
 
                     }
@@ -47,7 +46,7 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Exception: {ex.Message}");
+                Consol.WriteLine($"Exception: {ex.Message}");
 
             }
 
@@ -97,7 +96,6 @@ namespace Gestao_Centro_Saude.repository
                           name: reader.GetString(1),
                           mobilePhone: reader.GetString(2),
                           gender: reader.GetChar(3),
-                          category: Category.Patient,
                           userExams: userExams
                       );
                     }
@@ -105,7 +103,7 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Exception: {ex.Message}");
+                Console.WriteLine($"Exception: {ex.Message}");
             }
 
             return patient;
@@ -165,7 +163,7 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Exception: {ex.Message}");
+                Console.WriteLine($"Exception: {ex.Message}");
             }
             return userExams;
         }
@@ -200,8 +198,7 @@ namespace Gestao_Centro_Saude.repository
                             id: reader.GetInt32(0),
                             name: reader.GetString(1),
                             mobilePhone: reader.GetString(2),
-                            gender: reader.GetChar(3),
-                            category: Category.Patient
+                            gender: reader.GetChar(3)
                         ));
                     }
 
@@ -211,7 +208,7 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Exception: {ex.Message}");
+                Console.WriteLine($"Exception: {ex.Message}");
             }
 
             return patients;
@@ -253,7 +250,7 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Exception while inserting patient: {ex.Message}");
+                Console.WriteLine($"Exception while inserting patient: {ex.Message}");
                 return false; 
             }
         }

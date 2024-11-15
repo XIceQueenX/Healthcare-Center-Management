@@ -11,6 +11,13 @@ namespace Gestao_Centro_Saude.models
     {
         private static PatientRepository repo = new PatientRepository();
 
+        public int Id { get; private set; }
+        public string Name { get; set; }
+
+        public long Date { get; private set; } 
+        public string Staff { get; set; }
+        public string Diagnosis { get; set; }
+
         public PatientExam(int id, string name, long date, string staff, string diagnosis)
         {
             Id = id;
@@ -20,20 +27,8 @@ namespace Gestao_Centro_Saude.models
             Diagnosis = diagnosis;
         }
 
+
         PatientExam() { }
-
-        public int Id { get; private set; }
-        public string Name { get; set; }
-
-        public long Date { get; set; } 
-        public string Staff { get; set; }
-        public string Diagnosis { get; set; }
-
-        public void UpdateDiagnosis(string newDiagnosis)
-        {
-            Diagnosis = newDiagnosis;
-            Console.WriteLine("Success");
-        }
 
         public static List<PatientExam> GetExamsById(int id)
         {

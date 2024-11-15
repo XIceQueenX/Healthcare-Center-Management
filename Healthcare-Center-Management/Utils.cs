@@ -18,7 +18,5 @@ namespace Gestao_Centro_Saude
         public bool isEmptyTextField(string text) {
             return string.IsNullOrWhiteSpace(text);
         }
-
-
     }
 }

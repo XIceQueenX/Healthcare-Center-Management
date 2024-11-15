@@ -13,8 +13,8 @@ namespace Gestao_Centro_Saude.models
 
         public Patient() { }
 
-        public Patient(int id, string name, string mobilePhone, char gender, Category category, List<Exam>? userExams = null)
-        : base(id, name, mobilePhone, gender, category)
+        public Patient(int id, string name, string mobilePhone, char gender, List<Exam>? userExams = null)
+        : base(id, name, mobilePhone, gender, Category.Patient)
         {
             if (userExams != null)
             {
@@ -54,8 +54,5 @@ namespace Gestao_Centro_Saude.models
         {
             return repo.GetPatient(id);
         }
-       
-
-
     }
 }
