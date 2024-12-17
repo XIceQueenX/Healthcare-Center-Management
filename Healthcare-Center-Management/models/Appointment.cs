@@ -14,12 +14,7 @@ namespace Gestao_Centro_Saude.models
         public Patient Patient { get; private set; }
         public Staff Staff { get; set; }
         public string AdditionalDetails { get; set; }
-        public List<Exam> Exams { get; private set; } 
-
-
-        //public Exam Exam { get; private set; }
-        //public bool IsReturning { get; set; }
-
+        public List<Exam> Exams { get; private set; }  
 
         public Appointment(int id, long dateAndTime, Patient patient, Staff staff, List<Exam> exams, string additionalDetails = null)
         {
@@ -31,7 +26,6 @@ namespace Gestao_Centro_Saude.models
             Exams = exams ?? new List<Exam>(); 
 
         }
-
 
         public Appointment(int id, long dateAndTime, Patient patient, Staff staff/*, Exam exam, bool isReturning*/)
         {

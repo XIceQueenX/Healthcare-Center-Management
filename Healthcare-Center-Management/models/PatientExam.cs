@@ -9,8 +9,6 @@ namespace Gestao_Centro_Saude.models
 {
     public class PatientExam
     {
-        private static PatientRepository repo = new PatientRepository();
-
         public int Id { get; private set; }
         public string Name { get; set; }
 

@@ -25,12 +25,11 @@ namespace Gestao_Centro_Saude.ui
             InitializeComponent();
             _appointment = appointment;
 
-            labelDate.Text = $"Date: {DateTimeOffset.FromUnixTimeSeconds(_appointment.DateAndTime).DateTime}";
-            labelPatientName.Text = $"Patient Name: {_appointment.Patient.Name}";
-            labelPatientMobile.Text = $"Patient Mobile: {_appointment.Patient.Mobile_Phone}";
-            labelPatientGender.Text = $"Patient Gender: {_appointment.Patient.Gender}";
-            labelStaffName.Text = $"Staff Name: {_appointment.Staff.Name}";
-            labelStaffSpecialty.Text = $"Specialty: {_appointment.Staff.Specialty}";
+            labelDate.Text = DateTimeOffset.FromUnixTimeSeconds(_appointment.DateAndTime).DateTime.ToString();
+            labelPatientName.Text = _appointment.Patient.Name;
+            labelPatientMobile.Text = $"Mobile Phone: {_appointment.Patient.Mobile_Phone}";
+            labelPatientGender.Text = $"Gender:{_appointment.Patient.Gender.ToString()}";
+            labelStaffName.Text = $"Doctor: {_appointment.Staff.Name} - \t\t\t\t {_appointment.Staff.Specialty.ToString()}";
 
 
             var allExams = examServices.GetAllExams();
@@ -67,7 +66,7 @@ namespace Gestao_Centro_Saude.ui
                 int rowIndex = dataGridAddExam.Rows.Add();
 
                 dataGridAddExam.Rows[rowIndex].Cells["Id"].Value = examId;
-                dataGridAddExam.Rows[rowIndex].Cells["ExamName"].Value = exam.Name; 
+                dataGridAddExam.Rows[rowIndex].Cells["ExamName"].Value = exam.Name;
                 dataGridAddExam.Rows[rowIndex].Cells["isSelected"].Value = isScheduled;
 
                 DataGridViewCheckBoxCell checkBoxCell = (DataGridViewCheckBoxCell)dataGridAddExam.Rows[rowIndex].Cells["isSelected"];
@@ -76,11 +75,11 @@ namespace Gestao_Centro_Saude.ui
 
                 if (isScheduled)
                 {
-                    checkBoxCell.ReadOnly = true;  
+                    checkBoxCell.ReadOnly = true;
                 }
                 else
                 {
-                    checkBoxCell.ReadOnly = false;  
+                    checkBoxCell.ReadOnly = false;
                 }
             }
         }
@@ -197,11 +196,11 @@ namespace Gestao_Centro_Saude.ui
 
                 if ((bool)checkBoxCell.Value)
                 {
-                    dataGridAddExam.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGreen; 
+                    dataGridAddExam.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGreen;
                 }
                 else
                 {
-                    dataGridAddExam.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White; 
+                    dataGridAddExam.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
                 }
             }
         }
@@ -209,6 +208,11 @@ namespace Gestao_Centro_Saude.ui
         private void button1_Click(object sender, EventArgs e)
         {
             SaveSelectedExams();
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

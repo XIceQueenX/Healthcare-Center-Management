@@ -6,7 +6,6 @@ namespace Gestao_Centro_Saude.repository
 {
     internal class PatientRepository : DatabaseConfig
     {
-
         public Patient GetPatient(int id)
         {
             Patient patient = null;

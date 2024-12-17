@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBoxPatientName = new TextBox();
-            label1 = new Label();
+            labelName = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
@@ -39,26 +38,20 @@
             dateTimePickerAppointment = new DateTimePicker();
             SuspendLayout();
             // 
-            // textBoxPatientName
+            // labelName
             // 
-            textBoxPatientName.Location = new Point(293, 201);
-            textBoxPatientName.Name = "textBoxPatientName";
-            textBoxPatientName.Size = new Size(125, 27);
-            textBoxPatientName.TabIndex = 0;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(23, 18);
-            label1.Name = "label1";
-            label1.Size = new Size(64, 20);
-            label1.TabIndex = 1;
-            label1.Text = "Paciente";
+            labelName.AutoSize = true;
+            labelName.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelName.Location = new Point(23, 18);
+            labelName.Name = "labelName";
+            labelName.Size = new Size(127, 38);
+            labelName.TabIndex = 1;
+            labelName.Text = "Paciente";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(214, 86);
+            label2.Location = new Point(28, 82);
             label2.Name = "label2";
             label2.Size = new Size(101, 20);
             label2.TabIndex = 3;
@@ -67,7 +60,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(509, 82);
+            label3.Location = new Point(28, 166);
             label3.Name = "label3";
             label3.Size = new Size(123, 20);
             label3.TabIndex = 4;
@@ -76,7 +69,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(26, 86);
+            label4.Location = new Point(341, 82);
             label4.Name = "label4";
             label4.Size = new Size(59, 20);
             label4.TabIndex = 5;
@@ -85,7 +78,7 @@
             // comboBoxSpecialization
             // 
             comboBoxSpecialization.FormattingEnabled = true;
-            comboBoxSpecialization.Location = new Point(214, 109);
+            comboBoxSpecialization.Location = new Point(28, 105);
             comboBoxSpecialization.Name = "comboBoxSpecialization";
             comboBoxSpecialization.Size = new Size(250, 28);
             comboBoxSpecialization.TabIndex = 7;
@@ -93,7 +86,7 @@
             // comboStaff
             // 
             comboStaff.FormattingEnabled = true;
-            comboStaff.Location = new Point(26, 109);
+            comboStaff.Location = new Point(341, 105);
             comboStaff.Name = "comboStaff";
             comboStaff.Size = new Size(151, 28);
             comboStaff.TabIndex = 8;
@@ -104,13 +97,13 @@
             button1.Name = "button1";
             button1.Size = new Size(740, 49);
             button1.TabIndex = 10;
-            button1.Text = "Save";
+            button1.Text = "Schedule";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
             // dateTimePickerAppointment
             // 
-            dateTimePickerAppointment.Location = new Point(509, 109);
+            dateTimePickerAppointment.Location = new Point(28, 193);
             dateTimePickerAppointment.Name = "dateTimePickerAppointment";
             dateTimePickerAppointment.Size = new Size(250, 27);
             dateTimePickerAppointment.TabIndex = 11;
@@ -127,8 +120,7 @@
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(textBoxPatientName);
+            Controls.Add(labelName);
             Name = "AddAppointment";
             Text = "AddAppointment";
             Load += AddAppointment_Load;
@@ -137,9 +129,7 @@
         }
 
         #endregion
-
-        private TextBox textBoxPatientName;
-        private Label label1;
+        private Label labelName;
         private Label label2;
         private Label label3;
         private Label label4;

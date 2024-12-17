@@ -28,24 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
             dataGridView1 = new DataGridView();
             userExams = new DataGridView();
             button1 = new Button();
             label2 = new Label();
             label3 = new Label();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)userExams).BeginInit();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(14, 21);
-            label1.Name = "label1";
-            label1.Size = new Size(51, 20);
-            label1.TabIndex = 0;
-            label1.Text = "Exams";
             // 
             // dataGridView1
             // 
@@ -59,7 +50,7 @@
             // userExams
             // 
             userExams.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            userExams.Location = new Point(14, 118);
+            userExams.Location = new Point(12, 143);
             userExams.Name = "userExams";
             userExams.RowHeadersWidth = 51;
             userExams.Size = new Size(715, 114);
@@ -87,23 +78,33 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(14, 95);
+            label3.Location = new Point(12, 120);
             label3.Name = "label3";
             label3.Size = new Size(51, 20);
             label3.TabIndex = 5;
             label3.Text = "Exams";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(14, 12);
+            label1.Name = "label1";
+            label1.Size = new Size(70, 28);
+            label1.TabIndex = 6;
+            label1.Text = "label1";
             // 
             // PatientDetails
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(745, 450);
+            Controls.Add(label1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(button1);
             Controls.Add(userExams);
             Controls.Add(dataGridView1);
-            Controls.Add(label1);
             Name = "PatientDetails";
             Text = "PatientDetails";
             Load += PatientDetails_Load;
@@ -114,12 +115,11 @@
         }
 
         #endregion
-
-        private Label label1;
         private DataGridView dataGridView1;
         private DataGridView userExams;
         private Button button1;
         private Label label2;
         private Label label3;
+        private Label label1;
     }
 }

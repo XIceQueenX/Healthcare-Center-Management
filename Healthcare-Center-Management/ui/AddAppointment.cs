@@ -21,7 +21,7 @@ namespace Gestao_Centro_Saude.ui
 
             comboBoxSpecialization.SelectedIndexChanged += ComboBoxSpecialization_SelectedIndexChanged;
 
-            textBoxPatientName.Text = currentPatient.Name;
+            labelName.Text = currentPatient.Name;
         }
 
         private void LoadSpecializations()

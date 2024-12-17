@@ -1,15 +1,9 @@
 ﻿using Gestao_Centro_Saude.repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.models
 {
     public class Patient : User
     {
-        private static PatientRepository repo = new PatientRepository();
         public List<Exam>? UserExams { get; set; }
         public Patient() { }
 
@@ -28,15 +22,6 @@ namespace Gestao_Centro_Saude.models
             if (userExams != null)
                 UserExams = userExams;
             
-        }
-
-
-        public void AddExam(Exam exam)
-        {
-            if (UserExams == null)
-                UserExams = new List<Exam>();
-
-            UserExams.Add(exam);
         }
     }
 }
