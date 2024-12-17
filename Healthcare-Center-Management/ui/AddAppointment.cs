@@ -10,7 +10,6 @@ namespace Gestao_Centro_Saude.ui
         private StaffServices staffServices = new StaffServices();
         private AppointmentServicescs appointmentServicescs = new AppointmentServicescs();
 
-
         public AddAppointment(Patient patient)
         {
             InitializeComponent();

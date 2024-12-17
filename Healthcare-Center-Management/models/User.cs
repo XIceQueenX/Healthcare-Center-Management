@@ -7,13 +7,7 @@ using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.models
 {
-   public enum Category
-    {
-        Doctor,
-        Nurse,
-        Admin,
-        Patient
-    }
+
 
     public class User
     {

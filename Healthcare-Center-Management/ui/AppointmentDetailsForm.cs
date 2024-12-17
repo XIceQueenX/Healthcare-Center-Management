@@ -1,15 +1,6 @@
 ﻿using Gestao_Centro_Saude.models;
-using Gestao_Centro_Saude.repository;
 using Gestao_Centro_Saude.services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Gestao_Centro_Saude.ui
 {
@@ -24,8 +15,8 @@ namespace Gestao_Centro_Saude.ui
         {
             InitializeComponent();
             _appointment = appointment;
-
-            labelDate.Text = DateTimeOffset.FromUnixTimeSeconds(_appointment.DateAndTime).DateTime.ToString();
+           
+            labelDate.Text = _appointment.GetDateAndTimeAsDateTime().ToString();
             labelPatientName.Text = _appointment.Patient.Name;
             labelPatientMobile.Text = $"Mobile Phone: {_appointment.Patient.Mobile_Phone}";
             labelPatientGender.Text = $"Gender:{_appointment.Patient.Gender.ToString()}";
@@ -86,16 +77,6 @@ namespace Gestao_Centro_Saude.ui
 
 
 
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AppointmentDetailsForm_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void SaveSelectedExams()
         {
@@ -165,14 +146,6 @@ namespace Gestao_Centro_Saude.ui
             return startDate.AddDays(randomDays);
         }
 
-
-
-        private long GetSelectedExamDate()
-        {
-            return DateTime.Now.Ticks;
-        }
-
-
         private void dataGridViewExams_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dataGridAddExam.Columns[e.ColumnIndex] is DataGridViewCheckBoxColumn)
@@ -208,11 +181,6 @@ namespace Gestao_Centro_Saude.ui
         private void button1_Click(object sender, EventArgs e)
         {
             SaveSelectedExams();
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

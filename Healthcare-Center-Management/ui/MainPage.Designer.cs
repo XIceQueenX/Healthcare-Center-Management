@@ -63,7 +63,6 @@
             label1.Size = new Size(0, 26);
             label1.TabIndex = 2;
             label1.TextAlign = ContentAlignment.MiddleCenter;
-            label1.Click += label1_Click;
             // 
             // button3
             // 
@@ -132,7 +131,6 @@
             grid.Size = new Size(690, 333);
             grid.TabIndex = 8;
             grid.CellClick += onClickGridCell;
-            grid.CellContentClick += grid_CellContentClick;
             // 
             // label2
             // 

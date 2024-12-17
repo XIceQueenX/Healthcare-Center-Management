@@ -163,8 +163,7 @@ namespace Gestao_Centro_Saude.repository
                                         gender: reader.GetChar("staff_gender"),
                                         category: Category.Doctor,
                                         specialty: specialty
-                                    ),
-                                     exams: new List<Exam>()
+                                    )
                                 );
 
 
@@ -258,8 +257,7 @@ namespace Gestao_Centro_Saude.repository
                                             gender: reader.GetChar("staff_gender"),
                                             category: Category.Doctor,
                                             specialty: specialty
-                                        ),
-                                        exams: exams
+                                        )
                                     );
 
                                     appointments.Add(currentAppointment);

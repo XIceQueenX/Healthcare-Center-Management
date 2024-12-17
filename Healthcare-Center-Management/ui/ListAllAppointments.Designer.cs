@@ -62,7 +62,6 @@
             Name = "ListAllAppointments";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ListAllAppointments";
-            Load += ListAllAppointments_Load;
             ((System.ComponentModel.ISupportInitialize)grid).EndInit();
             ResumeLayout(false);
             PerformLayout();

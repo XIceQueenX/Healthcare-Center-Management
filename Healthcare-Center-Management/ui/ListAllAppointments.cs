@@ -33,8 +33,7 @@ namespace Gestao_Centro_Saude.ui
             var appointmentsSummary = _allAppointments.Select(appointment => new
             {
                 AppointmentId = appointment.Id,
-                AppointmentDate = DateTimeOffset.FromUnixTimeSeconds(appointment.DateAndTime)
-                                .DateTime.ToString("yyyy-MM-dd HH:mm"),
+                AppointmentDate = appointment.GetDateAndTimeAsDateTime().ToString(),
                 PatientName = appointment.Patient.Name,
                 StaffName = appointment.Staff.Name
             }).ToList();
@@ -43,7 +42,6 @@ namespace Gestao_Centro_Saude.ui
 
             grid.CellDoubleClick += Grid_CellDoubleClick;
         }
-
 
         private void Grid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -59,10 +57,6 @@ namespace Gestao_Centro_Saude.ui
                     detailsForm.ShowDialog();
                 }
             }
-
-        }
-        private void ListAllAppointments_Load(object sender, EventArgs e)
-        {
 
         }
     }

@@ -22,11 +22,6 @@ namespace Gestao_Centro_Saude.ui
 
         }
 
-        private void ListAllPatients_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void onClickGridCell(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)

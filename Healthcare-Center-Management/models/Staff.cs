@@ -7,22 +7,14 @@ using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.models
 {
-    public enum MedicalSpecialty
-    {
-        Cardiology,     
-        Dermatology,   
-        Pediatrics,     
-        Psychiatry,     
-        Urgency,
-        Surgery
-    }
+
 
     public class Staff:User
     {
         public MedicalSpecialty Specialty { get;  set; }
 
         public Staff(string name, string mobilePhone, char gender, Category category, MedicalSpecialty specialty)
-         : base( name, mobilePhone, gender, category)
+        : base( name, mobilePhone, gender, category)
         {
             Specialty = specialty; 
         }
@@ -32,12 +24,5 @@ namespace Gestao_Centro_Saude.models
         {
             Specialty = specialty;
         }
-
-        public void UpdateSpecialty(MedicalSpecialty newSpecialty)
-        {
-            Specialty = newSpecialty;
-            Console.WriteLine($"Specialty updated to {Specialty}.");
-        }
-
     }
 }

@@ -29,13 +29,5 @@ namespace Gestao_Centro_Saude.models
             Description = description;
             Cost = cost;
         }
-
-        public void UpdateCost(double value)
-        {
-            if(value != Cost)
-            {
-                Cost = value;
-            }
-        }
     }
 }

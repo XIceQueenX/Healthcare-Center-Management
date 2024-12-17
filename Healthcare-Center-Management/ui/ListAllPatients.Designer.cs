@@ -76,7 +76,6 @@
             Name = "ListAllPatients";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ListAllUsers";
-            Load += ListAllPatients_Load;
             ((System.ComponentModel.ISupportInitialize)grid).EndInit();
             ResumeLayout(false);
             PerformLayout();

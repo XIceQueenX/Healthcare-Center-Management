@@ -23,16 +23,12 @@ namespace Gestao_Centro_Saude
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /*AddNewUser addNewUser = new AddNewUser();
-            addNewUser.Show();*/
             ListAllPatients listAllPatients = new ListAllPatients();
             listAllPatients.Show();
-
         }
 
         private void Clients_Load(object sender, EventArgs e)
         {
-
             grid.DataSource = patientServices.GetPatients();
         }
 
@@ -48,11 +44,6 @@ namespace Gestao_Centro_Saude
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -62,11 +53,6 @@ namespace Gestao_Centro_Saude
         {
             ListAllAppointments listAllAppointments = new ListAllAppointments();
             listAllAppointments.Show();
-        }
-
-        private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

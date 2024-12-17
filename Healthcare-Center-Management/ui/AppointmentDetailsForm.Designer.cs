@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             labelPatientName = new Label();
             labelPatientMobile = new Label();
             labelPatientGender = new Label();
@@ -91,11 +92,17 @@
             // 
             dataGridAddExam.AllowUserToAddRows = false;
             dataGridAddExam.AllowUserToDeleteRows = false;
+            dataGridAddExam.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridAddExam.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridAddExam.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridAddExam.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridAddExam.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridAddExam.Location = new Point(40, 244);
             dataGridAddExam.Name = "dataGridAddExam";
             dataGridAddExam.ReadOnly = true;
-            dataGridAddExam.RowHeadersWidth = 51;
+            dataGridAddExam.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridAddExam.RowTemplate.Resizable = DataGridViewTriState.True;
             dataGridAddExam.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridAddExam.Size = new Size(670, 125);
             dataGridAddExam.TabIndex = 14;
@@ -145,7 +152,6 @@
             Name = "AppointmentDetailsForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AppointmentDetailsForm";
-            Load += AppointmentDetailsForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridAddExam).EndInit();
             ResumeLayout(false);
             PerformLayout();
