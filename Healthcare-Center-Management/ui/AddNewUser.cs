@@ -1,14 +1,5 @@
 ﻿using Gestao_Centro_Saude.models;
-using Gestao_Centro_Saude.repository;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using Gestao_Centro_Saude.services;
 
 namespace Gestao_Centro_Saude
 {
@@ -33,12 +24,10 @@ namespace Gestao_Centro_Saude
                 category: Category.Patient
             );
 
-            var repo = new PatientRepository();
+            var repo = new PatientServices();
 
             if (repo.InsertPatient(patient))
                 this.Close();
-            else
-                error.Text = "Failed";
         }
 
         private void AddNewUser_Load(object sender, EventArgs e)

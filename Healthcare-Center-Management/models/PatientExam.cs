@@ -27,14 +27,7 @@ namespace Gestao_Centro_Saude.models
             Diagnosis = diagnosis;
         }
 
-
         PatientExam() { }
-
-        public static List<PatientExam> GetExamsById(int id)
-        {
-            return repo.GetPatientExamsById(id);
-        }
-
 
     }
 }

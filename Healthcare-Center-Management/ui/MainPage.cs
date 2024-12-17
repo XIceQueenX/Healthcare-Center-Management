@@ -7,12 +7,15 @@ using Gestao_Centro_Saude.repository;
 using static System.Net.Mime.MediaTypeNames;
 using System.IO;
 using Gestao_Centro_Saude.ui;
+using Gestao_Centro_Saude.services;
 
 
 namespace Gestao_Centro_Saude
 {
     public partial class Clients : Form
     {
+
+        PatientServices patientServices = new PatientServices();
         public Clients()
         {
             InitializeComponent();
@@ -30,7 +33,7 @@ namespace Gestao_Centro_Saude
         private void Clients_Load(object sender, EventArgs e)
         {
 
-            grid.DataSource = Patient.GetPatients();
+            grid.DataSource = patientServices.GetPatients();
         }
 
         private void onClickGridCell(object sender, DataGridViewCellEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using Gestao_Centro_Saude.models;
 using Gestao_Centro_Saude.repository;
+using Gestao_Centro_Saude.services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,8 @@ namespace Gestao_Centro_Saude.ui
 {
     public partial class AppointmentDetailsForm : Form
     {
+        ExamServices examServices = new ExamServices();
+
         private Appointment _appointment;
 
         private HashSet<int> scheduledExamIds;
@@ -29,11 +32,10 @@ namespace Gestao_Centro_Saude.ui
             labelStaffName.Text = $"Staff Name: {_appointment.Staff.Name}";
             labelStaffSpecialty.Text = $"Specialty: {_appointment.Staff.Specialty}";
 
-            PatientRepository repo = new PatientRepository();
 
-            var allExams = repo.GetAllExams();
+            var allExams = examServices.GetAllExams();
 
-            var scheduledExams = repo.GetPatientExamsById(appointment.Patient.Id);
+            var scheduledExams = examServices.GetPatientExamsById(appointment.Patient.Id);
 
             scheduledExamIds = new HashSet<int>(scheduledExams.Select(exam => exam.Id));
 
@@ -115,8 +117,7 @@ namespace Gestao_Centro_Saude.ui
                 return;
             }
 
-            PatientRepository repo = new PatientRepository();
-            var scheduledExams = repo.GetPatientExamsById(_appointment.Patient.Id);
+            var scheduledExams = examServices.GetPatientExamsById(_appointment.Patient.Id);
             var scheduledExamIds = new HashSet<int>(scheduledExams.Select(exam => exam.Id));
 
             var examsToSchedule = selectedExamIds.Where(examId => !scheduledExamIds.Contains(examId)).ToList();
@@ -136,7 +137,7 @@ namespace Gestao_Centro_Saude.ui
                 {
                     DateTime examDate = GetRandomDate(startDate, endDate);
 
-                    bool success = repo.SaveExamForPatient(_appointment.Patient.Id, examId, 1, _appointment.Id, examDate); //TODO
+                    bool success = examServices.SaveExamForPatient(_appointment.Patient.Id, examId, 1, _appointment.Id, examDate); //TODO
 
                     if (success)
                     {

@@ -1,11 +1,13 @@
 ﻿using Gestao_Centro_Saude.models;
 using Gestao_Centro_Saude.repository;
+using Gestao_Centro_Saude.services;
 
 namespace Gestao_Centro_Saude.ui
 {
     public partial class AddAppointment : Form
     {
         private Patient currentPatient;
+        private StaffServices staffServices = new StaffServices();
 
         public AddAppointment(Patient patient)
         {
@@ -24,10 +26,7 @@ namespace Gestao_Centro_Saude.ui
 
         private void LoadSpecializations()
         {
-            var specializationRepository = new PatientRepository();
-            var specializations = specializationRepository.GetAllSpecializations();
-
-            comboBoxSpecialization.DataSource = specializations;
+            comboBoxSpecialization.DataSource = staffServices.GetAllSpecializations(); 
             comboBoxSpecialization.DisplayMember = "Description"; 
             comboBoxSpecialization.ValueMember = "Id";         
         }
@@ -38,8 +37,7 @@ namespace Gestao_Centro_Saude.ui
 
             if (selectedSpecialization != null)
             {
-                var staffRepository = new PatientRepository();
-                var staffList = staffRepository.GetStaffBySpecialty(selectedSpecialization.Id);
+                var staffList = staffServices.GetStaffBySpecialty(selectedSpecialization.Id);
 
                 comboStaff.DataSource = null;  
                 comboStaff.DataSource = staffList;

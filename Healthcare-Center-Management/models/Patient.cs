@@ -38,26 +38,5 @@ namespace Gestao_Centro_Saude.models
 
             UserExams.Add(exam);
         }
-
-
-        /**
-         * Methods from DB
-         * **/
-        public static List<Patient> GetPatients()
-        {
-            return repo.GetPatients();
-        }
-
-        public static Patient GetPatientById(int id)
-        {
-            return repo.GetPatient(id);
-        }
-
-        public static List<Exam> GetExams()
-        {
-
-            //Console.WriteLine(repo.GetAllExams());
-            return repo.GetAllExams();
-        }
     }
 }

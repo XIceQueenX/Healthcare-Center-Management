@@ -1,4 +1,5 @@
 ﻿using Gestao_Centro_Saude.models;
+using Gestao_Centro_Saude.services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,10 +14,11 @@ namespace Gestao_Centro_Saude.ui
 {
     public partial class ListAllPatients : Form
     {
+        PatientServices patientServices = new PatientServices();
         public ListAllPatients()
         {
             InitializeComponent();
-            grid.DataSource = Patient.GetPatients();
+            grid.DataSource = patientServices.GetPatients();
 
         }
 

@@ -1,5 +1,6 @@
 ﻿using Gestao_Centro_Saude.models;
 using Gestao_Centro_Saude.repository;
+using Gestao_Centro_Saude.services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ namespace Gestao_Centro_Saude.ui
 {
     public partial class ListAllAppointments : Form
     {
+        AppointmentServicescs appointmentServicescs = new AppointmentServicescs();
         private List<Appointment> _allAppointments;
 
         public ListAllAppointments()
@@ -25,8 +27,8 @@ namespace Gestao_Centro_Saude.ui
 
         private void LoadAppointments()
         {
-            PatientRepository patientRepository = new PatientRepository();
-            _allAppointments = patientRepository.GetAllAppointments();
+           
+            _allAppointments = appointmentServicescs.GetAllAppointments();
 
             var appointmentsSummary = _allAppointments.Select(appointment => new
             {

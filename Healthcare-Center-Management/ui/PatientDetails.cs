@@ -1,5 +1,6 @@
 ﻿using Gestao_Centro_Saude.models;
 using Gestao_Centro_Saude.repository;
+using Gestao_Centro_Saude.services;
 using Gestao_Centro_Saude.ui;
 using System;
 using System.Windows.Forms;
@@ -11,6 +12,8 @@ namespace Gestao_Centro_Saude
         private int patientId;
         private Patient patient;
         private static PatientDetails instance;
+        PatientServices PatientServices = new PatientServices();
+        ExamServices examServices = new ExamServices();
 
         private PatientDetails(int id)
         {
@@ -47,7 +50,7 @@ namespace Gestao_Centro_Saude
 
         private void LoadPatientDetails()
         {
-            var pat = Patient.GetPatientById(patientId);
+            var pat = PatientServices.GetPatientById(patientId);
             if (pat != null)
             {
                 label1.Text = $"Name: {pat.Name}\n" +
@@ -57,7 +60,7 @@ namespace Gestao_Centro_Saude
                 patient = pat;
             }
 
-            userExams.DataSource = PatientExam.GetExamsById(patientId);
+            userExams.DataSource = examServices.GetPatientExamsById(patientId);
         }
 
         private void button1_Click(object sender, EventArgs e)
