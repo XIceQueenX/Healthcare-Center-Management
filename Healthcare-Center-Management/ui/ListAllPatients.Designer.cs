@@ -74,6 +74,7 @@
             Controls.Add(button1);
             Controls.Add(grid);
             Name = "ListAllPatients";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ListAllUsers";
             Load += ListAllPatients_Load;
             ((System.ComponentModel.ISupportInitialize)grid).EndInit();

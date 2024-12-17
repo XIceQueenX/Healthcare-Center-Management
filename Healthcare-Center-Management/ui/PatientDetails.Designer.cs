@@ -28,24 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new DataGridView();
+            userAppointments = new DataGridView();
             userExams = new DataGridView();
             button1 = new Button();
             label2 = new Label();
             label3 = new Label();
             label1 = new Label();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            button2 = new Button();
+            ((System.ComponentModel.ISupportInitialize)userAppointments).BeginInit();
             ((System.ComponentModel.ISupportInitialize)userExams).BeginInit();
             SuspendLayout();
             // 
-            // dataGridView1
+            // userAppointments
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(14, 295);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(715, 116);
-            dataGridView1.TabIndex = 1;
+            userAppointments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            userAppointments.Location = new Point(14, 295);
+            userAppointments.Name = "userAppointments";
+            userAppointments.RowHeadersWidth = 51;
+            userAppointments.Size = new Size(715, 116);
+            userAppointments.TabIndex = 1;
             // 
             // userExams
             // 
@@ -94,32 +95,45 @@
             label1.TabIndex = 6;
             label1.Text = "label1";
             // 
+            // button2
+            // 
+            button2.Location = new Point(505, 77);
+            button2.Name = "button2";
+            button2.Size = new Size(224, 59);
+            button2.TabIndex = 7;
+            button2.Text = "Edit Personal Info";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // PatientDetails
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(745, 450);
+            Controls.Add(button2);
             Controls.Add(label1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(button1);
             Controls.Add(userExams);
-            Controls.Add(dataGridView1);
+            Controls.Add(userAppointments);
             Name = "PatientDetails";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "PatientDetails";
             Load += PatientDetails_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)userAppointments).EndInit();
             ((System.ComponentModel.ISupportInitialize)userExams).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private DataGridView dataGridView1;
+        private DataGridView userAppointments;
         private DataGridView userExams;
         private Button button1;
         private Label label2;
         private Label label3;
         private Label label1;
+        private Button button2;
     }
 }

@@ -34,7 +34,9 @@ namespace Gestao_Centro_Saude.ui
                 var selectedRow = grid.Rows[e.RowIndex];
                 int patientId = (int)selectedRow.Cells["Id"].Value;
 
-                PatientDetails.ShowPatientDetails(patientId);
+
+                PatientDetails patientDetails = new PatientDetails(patientId);
+                patientDetails.Show();
             }
         }
 
@@ -42,6 +44,7 @@ namespace Gestao_Centro_Saude.ui
         {
             AddNewUser addNewUser = new AddNewUser();
             addNewUser.Show();
+            this.Close();
         }
     }
 }

@@ -143,6 +143,7 @@
             Controls.Add(labelPatientMobile);
             Controls.Add(labelPatientName);
             Name = "AppointmentDetailsForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AppointmentDetailsForm";
             Load += AppointmentDetailsForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridAddExam).EndInit();

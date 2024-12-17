@@ -20,8 +20,7 @@ namespace Gestao_Centro_Saude
             Patient patient = new Patient(
                 name: patient_Name.Text,
                 mobilePhone: patient_mobilePhone.Text,
-                gender: 'F',
-                category: Category.Patient
+                gender: comboBox1.Text[0]
             );
 
             var repo = new PatientServices();
@@ -31,6 +30,11 @@ namespace Gestao_Centro_Saude
         }
 
         private void AddNewUser_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void patient_Name_TextChanged(object sender, EventArgs e)
         {
 
         }

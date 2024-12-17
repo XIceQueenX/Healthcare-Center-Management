@@ -32,11 +32,10 @@
             label1 = new Label();
             label2 = new Label();
             patient_mobilePhone = new TextBox();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
             button1 = new Button();
             label3 = new Label();
             error = new Label();
+            comboBox1 = new ComboBox();
             SuspendLayout();
             // 
             // patient_Name
@@ -45,6 +44,7 @@
             patient_Name.Name = "patient_Name";
             patient_Name.Size = new Size(125, 27);
             patient_Name.TabIndex = 0;
+            patient_Name.TextChanged += patient_Name_TextChanged;
             // 
             // label1
             // 
@@ -71,28 +71,6 @@
             patient_mobilePhone.Name = "patient_mobilePhone";
             patient_mobilePhone.Size = new Size(125, 27);
             patient_mobilePhone.TabIndex = 2;
-            // 
-            // radioButton1
-            // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(23, 120);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(78, 24);
-            radioButton1.TabIndex = 4;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Female";
-            radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(107, 120);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(63, 24);
-            radioButton2.TabIndex = 5;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Male";
-            radioButton2.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -122,21 +100,32 @@
             error.TabIndex = 8;
             error.Text = "Nome";
             // 
+            // comboBox1
+            // 
+            comboBox1.DisplayMember = "Male";
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "M", "F" });
+            comboBox1.Location = new Point(23, 120);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(125, 28);
+            comboBox1.TabIndex = 9;
+            comboBox1.ValueMember = "Male";
+            // 
             // AddNewUser
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(335, 281);
+            Controls.Add(comboBox1);
             Controls.Add(error);
             Controls.Add(label3);
             Controls.Add(button1);
-            Controls.Add(radioButton2);
-            Controls.Add(radioButton1);
             Controls.Add(label2);
             Controls.Add(patient_mobilePhone);
             Controls.Add(label1);
             Controls.Add(patient_Name);
             Name = "AddNewUser";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AddNewUser";
             Load += AddNewUser_Load;
             ResumeLayout(false);
@@ -149,10 +138,9 @@
         private Label label1;
         private Label label2;
         private TextBox patient_mobilePhone;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
         private Button button1;
         private Label label3;
         private Label error;
+        private ComboBox comboBox1;
     }
 }

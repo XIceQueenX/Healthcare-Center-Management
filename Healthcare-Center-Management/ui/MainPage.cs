@@ -43,7 +43,8 @@ namespace Gestao_Centro_Saude
                 var selectedRow = grid.Rows[e.RowIndex];
                 int patientId = (int)selectedRow.Cells["Id"].Value;
 
-                PatientDetails.ShowPatientDetails(patientId);
+                PatientDetails addNewUser = new PatientDetails(patientId);
+                addNewUser.Show();
             }
         }
 

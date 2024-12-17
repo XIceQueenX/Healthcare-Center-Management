@@ -14,7 +14,7 @@ namespace Gestao_Centro_Saude.services
 
         public PatientServices()
         {
-            _patientRepository = new PatientRepository(); 
+            _patientRepository = new PatientRepository();
         }
 
         public List<Patient> GetPatients()
@@ -31,5 +31,11 @@ namespace Gestao_Centro_Saude.services
         {
             return _patientRepository.InsertPatient(patient);
         }
+
+        public bool UpdatePatient(Patient patient)
+        {
+            return _patientRepository.UpdatePatient(patient);
+        }
+
     }
 }

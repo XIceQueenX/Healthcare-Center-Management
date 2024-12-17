@@ -8,6 +8,8 @@ namespace Gestao_Centro_Saude.ui
     {
         private Patient currentPatient;
         private StaffServices staffServices = new StaffServices();
+        private AppointmentServicescs appointmentServicescs = new AppointmentServicescs();
+
 
         public AddAppointment(Patient patient)
         {
@@ -56,10 +58,7 @@ namespace Gestao_Centro_Saude.ui
         private void button1_Click(object sender, EventArgs e)
         {
 
-            /*ScheduleExams addNewUser = new ScheduleExams(currentPatient);
-            addNewUser.Show();*/
-
-            /*try
+            try
             {
                 if (comboBoxSpecialization.SelectedItem == null || comboStaff.SelectedItem == null)
                 {
@@ -68,24 +67,19 @@ namespace Gestao_Centro_Saude.ui
                 }
 
                 var selectedStaff = comboStaff.SelectedItem as Staff;
-                var appointmentDateAndTime = dateTimePickerAppointment.Value; // Get DateTime from DateTimePicker
+                var appointmentDateAndTime = dateTimePickerAppointment.Value;
 
                 var newAppointment = new Appointment(
                     id: 0,
-                    dateAndTime: ((DateTimeOffset)appointmentDateAndTime).ToUnixTimeSeconds(), // Convert DateTime to long
+                    dateAndTime: ((DateTimeOffset)appointmentDateAndTime).ToUnixTimeSeconds(),
                     patient: currentPatient,
-                    staff: selectedStaff,
-                    exam: null//,
-                              //isReturning: checkBoxReturning.Checked
+                    staff: selectedStaff
                 );
 
-
-
-                var appointmentRepository = new PatientRepository();
-                if (appointmentRepository.InsertAppointment(newAppointment))
+                if (appointmentServicescs.InsertAppointment(newAppointment))
                 {
                     MessageBox.Show("Appointment successfully created!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //this.Close();
+                    this.Close();
                 }
                 else
                 {
@@ -95,7 +89,7 @@ namespace Gestao_Centro_Saude.ui
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
+            }
         }
 
         private void dataGridAddExam_CellContentClick(object sender, DataGridViewCellEventArgs e)

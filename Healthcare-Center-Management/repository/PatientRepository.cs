@@ -66,7 +66,6 @@ namespace Gestao_Centro_Saude.repository
                                     User.gender 
                                     FROM User INNER JOIN Patient ON User.id = Patient.id;";
 
-                    //TODO: Check use of 'using' on mysql commands
                     MySqlCommand command = new MySqlCommand(query, connection);
 
                     MySqlDataReader reader = command.ExecuteReader();
@@ -104,7 +103,8 @@ namespace Gestao_Centro_Saude.repository
                     connection.Open();
 
                     string userQuery = @"INSERT INTO User (name, mobile_phone, gender) 
-                                     VALUES (@name, @mobilePhone, @gender)";
+                                        VALUES (@name, @mobilePhone, @gender)";
+
                     MySqlCommand userCommand = new MySqlCommand(userQuery, connection);
                     userCommand.Parameters.AddWithValue("@name", patient.Name);
                     userCommand.Parameters.AddWithValue("@mobilePhone", patient.Mobile_Phone);
@@ -130,5 +130,41 @@ namespace Gestao_Centro_Saude.repository
                 return false;
             }
         }
+
+        public bool UpdatePatient(Patient patient)
+        {
+            try
+            {
+                using (MySqlConnection connection = CreateConnection())
+                {
+                    connection.Open();
+
+
+                    string query = "UPDATE User " +
+                                    "SET name = @Name, mobile_phone = @MobilePhone, gender = @Gender " +
+                                    "WHERE Id = @Id";
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
+
+                    
+                        command.Parameters.AddWithValue("@Name", patient.Name);
+                        command.Parameters.AddWithValue("@MobilePhone", patient.Mobile_Phone);
+                        command.Parameters.AddWithValue("@Gender", patient.Gender);
+                        command.Parameters.AddWithValue("@Id", patient.Id);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return false;
+            }
+        }
+
     }
 }
+
