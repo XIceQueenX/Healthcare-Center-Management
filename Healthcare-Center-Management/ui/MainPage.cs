@@ -6,6 +6,7 @@ using MySql.Data.MySqlClient;
 using Gestao_Centro_Saude.repository;
 using static System.Net.Mime.MediaTypeNames;
 using System.IO;
+using Gestao_Centro_Saude.ui;
 
 
 namespace Gestao_Centro_Saude
@@ -19,8 +20,11 @@ namespace Gestao_Centro_Saude
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AddNewUser addNewUser = new AddNewUser();
-            addNewUser.Show();
+            /*AddNewUser addNewUser = new AddNewUser();
+            addNewUser.Show();*/
+            ListAllPatients listAllPatients = new ListAllPatients();
+            listAllPatients.Show();
+
         }
 
         private void Clients_Load(object sender, EventArgs e)
@@ -48,6 +52,17 @@ namespace Gestao_Centro_Saude
         private void button4_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ListAllAppointments listAllAppointments = new ListAllAppointments();
+            listAllAppointments.Show();
+        }
+
+        private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

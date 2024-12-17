@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.models
 {
-    enum Category
+   public enum Category
     {
         Doctor,
         Nurse,
@@ -15,7 +15,7 @@ namespace Gestao_Centro_Saude.models
         Patient
     }
 
-    internal class User
+    public class User
     {
         private char gender;
         private string mobile_phone;

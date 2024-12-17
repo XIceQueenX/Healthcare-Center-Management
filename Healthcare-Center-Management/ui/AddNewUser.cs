@@ -29,7 +29,7 @@ namespace Gestao_Centro_Saude
             Patient patient = new Patient(
                 name: patient_Name.Text,
                 mobilePhone: patient_mobilePhone.Text,
-                gender: 'F', // Assuming the gender is 'F'; adjust based on input
+                gender: 'F',
                 category: Category.Patient
             );
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.models
 {
-    internal class PatientExam
+    public class PatientExam
     {
         private static PatientRepository repo = new PatientRepository();
 

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.models
 {
-    internal class Patient : User
+    public class Patient : User
     {
         private static PatientRepository repo = new PatientRepository();
-
+        public List<Exam>? UserExams { get; set; }
         public Patient() { }
 
         public Patient(int id, string name, string mobilePhone, char gender, List<Exam>? userExams = null)
@@ -26,12 +26,10 @@ namespace Gestao_Centro_Saude.models
        : base(name, mobilePhone, gender, category)
         {
             if (userExams != null)
-            {
                 UserExams = userExams;
-            }
+            
         }
 
-        public List<Exam>? UserExams { get; set; }
 
         public void AddExam(Exam exam)
         {
@@ -53,6 +51,13 @@ namespace Gestao_Centro_Saude.models
         public static Patient GetPatientById(int id)
         {
             return repo.GetPatient(id);
+        }
+
+        public static List<Exam> GetExams()
+        {
+
+            //Console.WriteLine(repo.GetAllExams());
+            return repo.GetAllExams();
         }
     }
 }

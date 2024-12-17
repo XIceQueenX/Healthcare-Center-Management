@@ -17,9 +17,9 @@ namespace Gestao_Centro_Saude.models
         Surgery
     }
 
-    internal class Staff:User
+    public class Staff:User
     {
-        public MedicalSpecialty Specialty { get; private set; }
+        public MedicalSpecialty Specialty { get;  set; }
 
         public Staff(string name, string mobilePhone, char gender, Category category, MedicalSpecialty specialty)
          : base( name, mobilePhone, gender, category)

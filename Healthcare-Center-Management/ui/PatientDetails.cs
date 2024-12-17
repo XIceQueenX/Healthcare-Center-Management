@@ -1,5 +1,6 @@
 ﻿using Gestao_Centro_Saude.models;
 using Gestao_Centro_Saude.repository;
+using Gestao_Centro_Saude.ui;
 using System;
 using System.Windows.Forms;
 
@@ -8,6 +9,7 @@ namespace Gestao_Centro_Saude
     public partial class PatientDetails : Form
     {
         private int patientId;
+        private Patient patient;
         private static PatientDetails instance;
 
         private PatientDetails(int id)
@@ -16,7 +18,6 @@ namespace Gestao_Centro_Saude
             patientId = id;
         }
 
-        //Singleton to avoid opening more than one instnace
         public static void ShowPatientDetails(int id)
         {
             if (instance == null || instance.IsDisposed)
@@ -34,27 +35,35 @@ namespace Gestao_Centro_Saude
         private void UpdatePatientDetails(int id)
         {
             patientId = id;
-            LoadPatientDetails(); 
+            LoadPatientDetails();
         }
 
         private void PatientDetails_Load(object sender, EventArgs e)
         {
             LoadPatientDetails();
 
-            
+
         }
 
         private void LoadPatientDetails()
         {
-           var pat = Patient.GetPatientById(patientId);
+            var pat = Patient.GetPatientById(patientId);
             if (pat != null)
             {
                 label1.Text = $"Name: {pat.Name}\n" +
                               $"Mobile Phone: {pat.Mobile_Phone}\n" +
                               $"Gender: {pat.Gender}\n";
+
+                patient = pat;
             }
 
             userExams.DataSource = PatientExam.GetExamsById(patientId);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AddAppointment addAppointment = new AddAppointment(patient);
+            addAppointment.Show();
         }
     }
 }
