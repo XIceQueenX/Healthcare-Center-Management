@@ -48,9 +48,11 @@
             grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             grid.Location = new Point(12, 78);
             grid.Name = "grid";
+            grid.ReadOnly = true;
             grid.RowHeadersWidth = 51;
             grid.Size = new Size(776, 339);
             grid.TabIndex = 3;
+            grid.CellContentClick += grid_CellContentClick;
             // 
             // ListAllAppointments
             // 

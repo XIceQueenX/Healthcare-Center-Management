@@ -25,9 +25,12 @@ namespace Gestao_Centro_Saude.ui
             LoadAppointments();
         }
 
+        /// <summary>
+        /// filer the data to be diplayed in the grid
+        /// </summary>
         private void LoadAppointments()
         {
-           
+
             _allAppointments = appointmentServicescs.GetAllAppointments();
 
             var appointmentsSummary = _allAppointments.Select(appointment => new
@@ -43,9 +46,15 @@ namespace Gestao_Centro_Saude.ui
             grid.CellDoubleClick += Grid_CellDoubleClick;
         }
 
+
+        /// <summary>
+        /// When click on the cell, open the details of the desired appointment.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Grid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) 
+            if (e.RowIndex >= 0)
             {
                 int selectedAppointmentId = (int)grid.Rows[e.RowIndex].Cells["AppointmentId"].Value;
 
@@ -57,6 +66,11 @@ namespace Gestao_Centro_Saude.ui
                     detailsForm.ShowDialog();
                 }
             }
+
+        }
+
+        private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

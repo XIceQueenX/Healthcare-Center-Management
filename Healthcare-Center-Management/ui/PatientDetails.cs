@@ -12,6 +12,8 @@ namespace Gestao_Centro_Saude
         private int patientId;
         private Patient patient;
 
+        private List<Appointment> _allAppointments;
+
 
         PatientServices PatientServices = new PatientServices();
         ExamServices examServices = new ExamServices();
@@ -43,8 +45,18 @@ namespace Gestao_Centro_Saude
                 patient = pat;
             }
 
+            _allAppointments = appointmentServicescs.GetAppointmentsByUserId(patientId);
+
+            var appointmentsSummary = _allAppointments.Select(appointment => new
+            {
+                AppointmentId = appointment.Id,
+                AppointmentDate = appointment.GetDateAndTimeAsDateTime().ToString(),
+                PatientName = appointment.Patient.Name,
+                StaffName = appointment.Staff.Name
+            }).ToList();
+
             userExams.DataSource = examServices.GetPatientExamsById(patientId);
-            userAppointments.DataSource = appointmentServicescs.GetAppointmentsByUserId(patientId);
+            userAppointments.DataSource = appointmentsSummary;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -57,6 +69,22 @@ namespace Gestao_Centro_Saude
         {
             EditPersonalnfo editPersonalnfo = new EditPersonalnfo(patient);
             editPersonalnfo.Show();
+        }
+
+        private void userAppointments_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                int selectedAppointmentId = (int)userAppointments.Rows[e.RowIndex].Cells["AppointmentId"].Value;
+
+                var selectedAppointment = _allAppointments.FirstOrDefault(a => a.Id == selectedAppointmentId);
+
+                if (selectedAppointment != null)
+                {
+                    AppointmentDetailsForm detailsForm = new AppointmentDetailsForm(selectedAppointment);
+                    detailsForm.ShowDialog();
+                }
+            }
         }
     }
 }

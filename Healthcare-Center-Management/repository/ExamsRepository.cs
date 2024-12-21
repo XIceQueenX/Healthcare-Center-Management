@@ -172,7 +172,8 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error fetching exams for appointment {appointmentId}: {ex.Message}");
+                Log(TAG, ex.Message);
+
             }
 
             return exams;

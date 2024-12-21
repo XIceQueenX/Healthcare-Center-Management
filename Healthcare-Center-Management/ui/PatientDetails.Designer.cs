@@ -44,15 +44,18 @@
             userAppointments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             userAppointments.Location = new Point(14, 295);
             userAppointments.Name = "userAppointments";
+            userAppointments.ReadOnly = true;
             userAppointments.RowHeadersWidth = 51;
             userAppointments.Size = new Size(715, 116);
             userAppointments.TabIndex = 1;
+            userAppointments.CellContentClick += userAppointments_CellContentClick;
             // 
             // userExams
             // 
             userExams.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             userExams.Location = new Point(12, 143);
             userExams.Name = "userExams";
+            userExams.ReadOnly = true;
             userExams.RowHeadersWidth = 51;
             userExams.Size = new Size(715, 114);
             userExams.TabIndex = 2;

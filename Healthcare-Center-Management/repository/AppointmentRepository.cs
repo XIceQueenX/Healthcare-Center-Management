@@ -1,5 +1,6 @@
 ﻿using Gestao_Centro_Saude.models;
 using Gestao_Centro_Saude.services;
+using Microsoft.VisualBasic.ApplicationServices;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -99,7 +100,6 @@ namespace Gestao_Centro_Saude.repository
         public List<Appointment> GetAllAppointments()
         {
             List<Appointment> appointments = new List<Appointment>();
-
             try
             {
                 using (MySqlConnection connection = CreateConnection())
@@ -107,72 +107,75 @@ namespace Gestao_Centro_Saude.repository
                     connection.Open();
 
                     string query = @"
-    SELECT 
-        a.id AS appointment_id, 
-        a.date AS appointment_date,
-        a.additional_details AS additional_details,
-        s.category_id AS staff_category_id, 
-        c.name AS category_name, 
-        sp.description AS staff_specialty,
-        sp.id AS staff_specialty_id,
-        p.id AS patient_id, 
-        pu.name AS patient_name, 
-        pu.mobile_phone AS patient_mobilePhone, 
-        pu.gender AS patient_gender,
-        s.id AS staff_id, 
-        su.name AS staff_name, 
-        su.mobile_phone AS staff_mobilePhone, 
-        su.gender AS staff_gender
-    FROM Appointment a
-    JOIN Patient p ON a.idPatient = p.id
-    JOIN Staff s ON a.idStaff = s.id
-    JOIN Category c ON s.category_id = c.id
-    JOIN Specialization sp ON s.idSpecialization = sp.id
-    JOIN User pu ON p.id = pu.id
-    JOIN User su ON s.id = su.id
-    ORDER BY a.date DESC;";
+                    SELECT 
+                        a.id AS appointment_id, 
+                        a.date AS appointment_date,
+                        a.additional_details AS additional_details,
+                        s.category_id AS staff_category_id, 
+                        c.name AS category_name, 
+                        sp.description AS staff_specialty,
+                        sp.id AS staff_specialty_id,
+                        p.id AS patient_id, 
+                        pu.name AS patient_name, 
+                        pu.mobile_phone AS patient_mobilePhone, 
+                        pu.gender AS patient_gender,
+                        s.id AS staff_id, 
+                        su.name AS staff_name, 
+                        su.mobile_phone AS staff_mobilePhone, 
+                        su.gender AS staff_gender
+                    FROM Appointment a
+                    JOIN Patient p ON a.idPatient = p.id
+                    JOIN Staff s ON a.idStaff = s.id
+                    JOIN Category c ON s.category_id = c.id
+                    JOIN Specialization sp ON s.idSpecialization = sp.id
+                    JOIN User pu ON p.id = pu.id
+                    JOIN User su ON s.id = su.id
+                    ORDER BY a.date DESC;";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
-                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        while (reader.Read())
+
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            string? additionalDetails = reader["additional_details"] as string;
+                            while (reader.Read())
+                            {
+                                string? additionalDetails = reader["additional_details"] as string;
 
-                            Appointment appointment = new Appointment(
-                                id: Convert.ToInt32(reader["appointment_id"]),
-                                dateAndTime: Convert.ToInt64(reader["appointment_date"]),
-                                additionalDetails: additionalDetails ?? "",
-                                patient: new Patient(
-                                    id: Convert.ToInt32(reader["patient_id"]),
-                                    name: reader["patient_name"].ToString(),
-                                    mobilePhone: reader["patient_mobilePhone"].ToString(),
-                                    gender: Convert.ToChar(reader["patient_gender"])
-                                ),
-                                staff: new Staff(
-                                    id: Convert.ToInt32(reader["staff_id"]),
-                                    name: reader["staff_name"].ToString(),
-                                    mobilePhone: reader["staff_mobilePhone"].ToString(),
-                                    gender: Convert.ToChar(reader["staff_gender"]),
-                                    category: new Category(
-                                        id: Convert.ToInt32(reader["staff_category_id"]),
-                                        description: reader["category_name"].ToString()
-                                    ),
-                                    specialty: new Specialization(
-                                        id: Convert.ToInt32(reader["staff_specialty_id"]),
-                                        description: reader["staff_specialty"].ToString()
-                                    )
-                                )
-                            );
+                                Appointment appointment = new Appointment(
+                                 id: reader.GetInt16("appointment_id"),
+                                 dateAndTime: reader.GetInt64("appointment_date"),
+                                 additionalDetails: additionalDetails ?? "",
+                                 patient: new Patient(
+                                     id: reader.GetInt16("patient_id"),
+                                     name: reader.GetString("patient_name"),
+                                     mobilePhone: reader.GetString("patient_mobilePhone"),
+                                     gender: Convert.ToChar(reader["patient_gender"])
+                                 ),
+                                 staff: new Staff(
+                                     id: reader.GetInt16("staff_id"),
+                                     name: reader.GetString("staff_name"),
+                                     mobilePhone: reader.GetString("staff_mobilePhone"),
+                                     gender: reader.GetChar("staff_gender"),
+                                     category: new Category(
+                                         id: reader.GetInt16("staff_category_id"),
+                                         description: reader.GetString("category_name")
+                                     ),
+                                     specialty: new Specialization(
+                                         id: reader.GetInt16("staff_specialty_id"),
+                                         description: reader.GetString("staff_specialty")
+                                     )
+                                 )
+                             );
 
-                            appointments.Add(appointment);
+                                appointments.Add(appointment);
+                            }
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Log("GetAllAppointments", ex.Message);
+                Log(TAG, ex.Message);
             }
 
             return appointments;
@@ -195,31 +198,31 @@ namespace Gestao_Centro_Saude.repository
                     connection.Open();
 
                     string query = @"
-    SELECT 
-        a.id AS appointment_id, 
-        a.date AS appointment_date,
-        a.additional_details AS additional_details,
-        s.category_id AS staff_category_id, 
-        c.name AS category_name, 
-        sp.description AS staff_specialty,
-        sp.id AS staff_specialty_id,
-        p.id AS patient_id, 
-        pu.name AS patient_name, 
-        pu.mobile_phone AS patient_mobilePhone, 
-        pu.gender AS patient_gender,
-        s.id AS staff_id, 
-        su.name AS staff_name, 
-        su.mobile_phone AS staff_mobilePhone, 
-        su.gender AS staff_gender
-    FROM Appointment a
-    JOIN Patient p ON a.idPatient = p.id
-    JOIN Staff s ON a.idStaff = s.id
-    JOIN Category c ON s.category_id = c.id
-    JOIN Specialization sp ON s.idSpecialization = sp.id
-    JOIN User pu ON p.id = pu.id
-    JOIN User su ON s.id = su.id
-    WHERE pu.id = @userId
-    ORDER BY a.date DESC;";
+                    SELECT 
+                        a.id AS appointment_id, 
+                        a.date AS appointment_date,
+                        a.additional_details AS additional_details,
+                        s.category_id AS staff_category_id, 
+                        c.name AS category_name, 
+                        sp.description AS staff_specialty,
+                        sp.id AS staff_specialty_id,
+                        p.id AS patient_id, 
+                        pu.name AS patient_name, 
+                        pu.mobile_phone AS patient_mobilePhone, 
+                        pu.gender AS patient_gender,
+                        s.id AS staff_id, 
+                        su.name AS staff_name, 
+                        su.mobile_phone AS staff_mobilePhone, 
+                        su.gender AS staff_gender
+                    FROM Appointment a
+                    JOIN Patient p ON a.idPatient = p.id
+                    JOIN Staff s ON a.idStaff = s.id
+                    JOIN Category c ON s.category_id = c.id
+                    JOIN Specialization sp ON s.idSpecialization = sp.id
+                    JOIN User pu ON p.id = pu.id
+                    JOIN User su ON s.id = su.id
+                    WHERE pu.id = @userId
+                    ORDER BY a.date DESC;";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
@@ -232,30 +235,30 @@ namespace Gestao_Centro_Saude.repository
                                 string? additionalDetails = reader["additional_details"] as string;
 
                                 Appointment appointment = new Appointment(
-                                    id: Convert.ToInt32(reader["appointment_id"]),
-                                    dateAndTime: Convert.ToInt64(reader["appointment_date"]),
-                                    additionalDetails: additionalDetails ?? "",
-                                    patient: new Patient(
-                                        id: Convert.ToInt32(reader["patient_id"]),
-                                        name: reader["patient_name"].ToString(),
-                                        mobilePhone: reader["patient_mobilePhone"].ToString(),
-                                        gender: Convert.ToChar(reader["patient_gender"])
-                                    ),
-                                    staff: new Staff(
-                                        id: Convert.ToInt32(reader["staff_id"]),
-                                        name: reader["staff_name"].ToString(),
-                                        mobilePhone: reader["staff_mobilePhone"].ToString(),
-                                        gender: Convert.ToChar(reader["staff_gender"]),
-                                        category: new Category(
-                                            id: Convert.ToInt32(reader["staff_category_id"]),
-                                            description: reader["category_name"].ToString()
-                                        ),
-                                        specialty: new Specialization(
-                                            id: Convert.ToInt32(reader["staff_specialty_id"]),
-                                            description: reader["staff_specialty"].ToString()
-                                        )
-                                    )
-                                );
+                                 id: reader.GetInt16("appointment_id"),
+                                 dateAndTime: reader.GetInt64("appointment_date"),
+                                 additionalDetails: additionalDetails ?? "",
+                                 patient: new Patient(
+                                     id: reader.GetInt16("patient_id"),
+                                     name: reader.GetString("patient_name"),
+                                     mobilePhone: reader.GetString("patient_mobilePhone"),
+                                     gender: Convert.ToChar(reader["patient_gender"])
+                                 ),
+                                 staff: new Staff(
+                                     id: reader.GetInt16("staff_id"),
+                                     name: reader.GetString("staff_name"),
+                                     mobilePhone: reader.GetString("staff_mobilePhone"),
+                                     gender: reader.GetChar("staff_gender"),
+                                     category: new Category(
+                                         id: reader.GetInt16("staff_category_id"),
+                                         description: reader.GetString("category_name")
+                                     ),
+                                     specialty: new Specialization(
+                                         id: reader.GetInt16("staff_specialty_id"),
+                                         description: reader.GetString("staff_specialty")
+                                     )
+                                 )
+                             );
 
                                 appointments.Add(appointment);
                             }
@@ -265,13 +268,105 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Log("GetAppointmentsByUserId", ex.Message);
+                Log(TAG, ex.Message);
             }
 
             return appointments;
         }
 
+        /// <summary>
+        /// Return all the appointments of the day
+        /// </summary>
+        /// <returns></returns>
+        /// <summary>
+        /// Return all the appointments of the day
+        /// </summary>
+        /// <returns></returns>
+        public List<Appointment> GetAppointmentsOfTheDay()
+        {
+            List<Appointment> appointments = new List<Appointment>();
 
+            try
+            {
+                using (MySqlConnection connection = CreateConnection())
+                {
+                    connection.Open();
+
+                    string query = @"
+             SELECT 
+                 a.id AS appointment_id, 
+                 a.date AS appointment_date,
+                 a.additional_details AS additional_details,
+                 s.category_id AS staff_category_id, 
+                 c.name AS category_name, 
+                 sp.description AS staff_specialty,
+                 sp.id AS staff_specialty_id,
+                 p.id AS patient_id, 
+                 pu.name AS patient_name, 
+                 pu.mobile_phone AS patient_mobilePhone, 
+                 pu.gender AS patient_gender,
+                 s.id AS staff_id, 
+                 su.name AS staff_name, 
+                 su.mobile_phone AS staff_mobilePhone, 
+                 su.gender AS staff_gender
+             FROM Appointment a
+             JOIN Patient p ON a.idPatient = p.id
+             JOIN Staff s ON a.idStaff = s.id
+             JOIN Category c ON s.category_id = c.id
+             JOIN Specialization sp ON s.idSpecialization = sp.id
+             JOIN User pu ON p.id = pu.id
+             JOIN User su ON s.id = su.id
+             WHERE DATE(FROM_UNIXTIME(a.date)) = CURDATE()
+             ORDER BY a.date ASC;";
+
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string? additionalDetails = reader.GetString("additional_details");
+
+                                Appointment appointment = new Appointment(
+                                id: reader.GetInt16("appointment_id"),
+                                dateAndTime: reader.GetInt64("appointment_date"),
+                                additionalDetails: additionalDetails,
+                                patient: new Patient(
+                                    id: reader.GetInt16("patient_id"),
+                                    name: reader.GetString("patient_name"),
+                                    mobilePhone: reader.GetString("patient_mobilePhone"),
+                                    gender: Convert.ToChar(reader["patient_gender"])
+                                ),
+                                staff: new Staff(
+                                    id: reader.GetInt16("staff_id"),
+                                    name: reader.GetString("staff_name"),
+                                    mobilePhone: reader.GetString("staff_mobilePhone"),
+                                    gender: reader.GetChar("staff_gender"),
+                                    category: new Category(
+                                        id: reader.GetInt16("staff_category_id"),
+                                        description: reader.GetString("category_name")
+                                    ),
+                                    specialty: new Specialization(
+                                        id: reader.GetInt16("staff_specialty_id"),
+                                        description: reader.GetString("staff_specialty")
+                                    )
+                                )
+                            );
+                                appointments.Add(appointment);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log(TAG, ex.Message);
+            }
+
+            return appointments;
+
+        }
         public void Log(string tag, string message)
         {
             Debug.WriteLine(message, tag);

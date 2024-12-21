@@ -113,8 +113,8 @@ u.mobile_phone,
                                 Staff staff = new Staff(
                                     id: staffId,
                                     name: staffName,
-                                    mobilePhone: reader.GetString("mobile_phone"), 
-                                    gender: reader.GetChar("gender"), 
+                                    mobilePhone: reader.GetString("mobile_phone"),
+                                    gender: reader.GetChar("gender"),
                                     category: category,
                                     specialty: specialization
                                 );
@@ -126,7 +126,7 @@ u.mobile_phone,
             }
             catch (Exception ex)
             {
-                Log("GetStaffBySpecialty", ex.Message);
+                Log(TAG, ex.Message);
             }
 
             return staffList;

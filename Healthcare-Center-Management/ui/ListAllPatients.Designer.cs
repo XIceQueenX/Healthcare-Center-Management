@@ -39,6 +39,7 @@
             grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             grid.Location = new Point(12, 99);
             grid.Name = "grid";
+            grid.ReadOnly = true;
             grid.RowHeadersWidth = 51;
             grid.Size = new Size(776, 339);
             grid.TabIndex = 0;

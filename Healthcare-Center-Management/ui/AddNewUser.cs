@@ -5,11 +5,20 @@ namespace Gestao_Centro_Saude
 {
     public partial class AddNewUser : Form
     {
+
+        /// <summary>
+        /// Initialize the form
+        /// </summary>
         public AddNewUser()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Add the user to db, then close the windows
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             Patient patient = new Patient(

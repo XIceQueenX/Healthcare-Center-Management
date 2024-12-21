@@ -24,6 +24,9 @@ namespace Gestao_Centro_Saude.ui
             LoadPatientInfo();
         }
 
+        /// <summary>
+        /// Put the patient info into the label
+        /// </summary>
         private void LoadPatientInfo()
         {
             patient_Name.Text = patient.Name;
@@ -31,6 +34,11 @@ namespace Gestao_Centro_Saude.ui
             comboBox1.Text = patient.Gender.ToString(); 
         }
 
+        /// <summary>
+        /// Edit the personla info
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             Patient patient = new Patient(

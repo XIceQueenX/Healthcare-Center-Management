@@ -30,7 +30,9 @@ namespace Gestao_Centro_Saude.ui
             setupView();
         }
 
-
+        /// <summary>
+        /// Setup the view
+        /// </summary>
         private void setupView()
         {
             labelDate.Text = _appointment.GetDateAndTimeAsDateTime().ToString();
@@ -47,6 +49,9 @@ namespace Gestao_Centro_Saude.ui
 
         }
 
+        /// <summary>
+        /// Config the cells on grid
+        /// </summary>
         private void setupDataViewCells()
         {
 
@@ -77,6 +82,10 @@ namespace Gestao_Centro_Saude.ui
                 }
             }
         }
+
+        /// <summary>
+        /// TOggle the visibiliaty of the addional details, according with the time this log is access.
+        /// </summary>
         private void ToggleTextBoxVisibility()
         {
             DateTime currentDateTime = DateTime.Now;
@@ -110,6 +119,9 @@ namespace Gestao_Centro_Saude.ui
         }
 
 
+        /// <summary>
+        /// Save the selectes exames, excluding those already selected
+        /// </summary>
         private void SaveSelectedExams()
         {
             var selectedExamIds = new List<int>();
@@ -153,6 +165,12 @@ namespace Gestao_Centro_Saude.ui
             }
         }
 
+
+        /// <summary>
+        /// GEt Random date to the exam
+        /// </summary>
+        /// <param name="appointmentDate"></param>
+        /// <returns></returns>
         public DateTime GetRandomDate(DateTime appointmentDate)
         {
             Random random = new Random();
@@ -167,6 +185,11 @@ namespace Gestao_Centro_Saude.ui
             return randomDate;
         }
 
+        /// <summary>
+        /// Logic to keep selected the already shedule exams
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewExams_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dataGridAddExam.Columns[e.ColumnIndex] is DataGridViewCheckBoxColumn)
@@ -186,11 +209,22 @@ namespace Gestao_Centro_Saude.ui
             }
         }
 
+        /// <summary>
+        /// Call the function to save the patientexams to db
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             SaveSelectedExams();
         }
 
+
+        /// <summary>
+        /// Update the addional details if is in the day of apppoitment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             appointmentServicescs.UpdateAdditionalDetails(_appointment.Id, textBox1.Text);

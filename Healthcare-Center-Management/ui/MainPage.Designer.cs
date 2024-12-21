@@ -1,6 +1,6 @@
 ﻿namespace Gestao_Centro_Saude
 {
-    partial class Clients
+    partial class MainPage
     {
         /// <summary>
         ///  Required designer variable.
@@ -157,6 +157,7 @@
             button2.TabIndex = 10;
             button2.Text = "STAFF";
             button2.UseVisualStyleBackColor = false;
+            button2.Visible = false;
             button2.Click += button2_Click;
             // 
             // Clients
@@ -176,7 +177,6 @@
             Name = "Clients";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Clients";
-            Load += Clients_Load;
             ((System.ComponentModel.ISupportInitialize)grid).EndInit();
             ResumeLayout(false);
             PerformLayout();

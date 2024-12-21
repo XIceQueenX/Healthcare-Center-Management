@@ -18,9 +18,17 @@ namespace Gestao_Centro_Saude.ui
         public ListAllPatients()
         {
             InitializeComponent();
+
             grid.DataSource = patientServices.GetPatients();
+            grid.Columns[grid.Columns.Count - 1].Visible = false;
+
         }
 
+        /// <summary>
+        /// Print the patient deitals in another form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void onClickGridCell(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -34,6 +42,11 @@ namespace Gestao_Centro_Saude.ui
             }
         }
 
+        /// <summary>
+        /// Add Patient do db
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             AddNewUser addNewUser = new AddNewUser();
