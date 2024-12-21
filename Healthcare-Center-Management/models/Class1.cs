@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.models
 {
-     public class Specialization
+
+    public class Category
     {
-        public int Id { get; set; } 
-        public string Description { get; set; } 
+        public int Id { get; set; }
+        public string Description { get; set; }
 
+        public Category() { }
 
-        public Specialization(int id, string description)
+        public Category(int id, string description)
         {
             Id = id;
             Description = description;
@@ -23,6 +25,4 @@ namespace Gestao_Centro_Saude.models
             return Description;
         }
     }
-
-
 }

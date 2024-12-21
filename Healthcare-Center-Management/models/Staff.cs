@@ -7,22 +7,16 @@ using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.models
 {
-
-
     public class Staff:User
     {
-        public MedicalSpecialty Specialty { get;  set; }
+        public Specialization speciality { get;  set; }
+        public Category category { get; set; }
 
-        public Staff(string name, string mobilePhone, char gender, Category category, MedicalSpecialty specialty)
-        : base( name, mobilePhone, gender, category)
-        {
-            Specialty = specialty; 
-        }
-
-        public Staff(int id, string name, string mobilePhone, char gender, Category category, MedicalSpecialty specialty)
+        public Staff(int id, string name, string mobilePhone, char gender, Category category, Specialization specialty)
         : base(id, name, mobilePhone, gender, category)
         {
-            Specialty = specialty;
+            speciality = specialty;
+            category = category;
         }
     }
 }

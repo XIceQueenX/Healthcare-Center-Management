@@ -3,15 +3,18 @@ using Gestao_Centro_Saude.services;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.repository
 {
-    internal class AppointmentRepository : DatabaseConfig
+    
+    internal class AppointmentRepository : DatabaseConfig, ILogger
     {
-      
+
+        string TAG = "AppointmentRepo";
         public bool InsertAppointment(Appointment appointment)
         {
             try
@@ -36,7 +39,7 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception while inserting appointment: {ex.Message}");
+                Log(TAG, ex.Message);
                 return false;
             }
         }
@@ -83,7 +86,7 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception while scheduling appointment: {ex.Message}");
+                Log(TAG, ex.Message);
                 return false;
             }
         }
@@ -100,82 +103,84 @@ namespace Gestao_Centro_Saude.repository
                     connection.Open();
 
                     string query = @"
-                SELECT 
-                    a.id AS appointment_id, 
-                    a.date AS appointment_date,
-    a.additional_details AS additional_details,  -- Fetch the new column
+            SELECT 
+                a.id AS appointment_id, 
+                a.date AS appointment_date,
+                a.additional_details AS additional_details,
+                s.category_id AS staff_category_id, 
+                c.name AS category_name, 
+                sp.description AS staff_specialty,
+                sp.id AS staff_specialty_id,
 
-                    p.id AS patient_id, 
-                    s.id AS staff_id, 
-                    sp.description AS staff_specialty,
-                    pu.name AS patient_name, 
-                    pu.mobile_phone AS patient_mobilePhone, 
-                    pu.gender AS patient_gender,
-                    su.name AS staff_name, 
-                    su.mobile_phone AS staff_mobilePhone, 
-                    su.gender AS staff_gender
-                FROM Appointment a
-                JOIN Patient p ON a.idPatient = p.id
-                JOIN Staff s ON a.idStaff = s.id
-                JOIN Specialization sp ON s.idSpecialization = sp.id
-                JOIN User pu ON p.id = pu.id  -- Join to get Patient info from User table
-                JOIN User su ON s.id = su.id  -- Join to get Staff info from User table
-                ORDER BY a.date DESC;
-            ";
+                p.id AS patient_id, 
+                pu.name AS patient_name, 
+                pu.mobile_phone AS patient_mobilePhone, 
+                pu.gender AS patient_gender,
+                s.id AS staff_id, 
+                su.name AS staff_name, 
+                su.mobile_phone AS staff_mobilePhone, 
+                su.gender AS staff_gender
+            FROM Appointment a
+            JOIN Patient p ON a.idPatient = p.id
+            JOIN Staff s ON a.idStaff = s.id
+            JOIN Category c ON s.category_id = c.id
+            JOIN Specialization sp ON s.idSpecialization = sp.id
+            JOIN User pu ON p.id = pu.id
+            JOIN User su ON s.id = su.id
+            ORDER BY a.date DESC;";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        Appointment currentAppointment = null;
-
                         while (reader.Read())
                         {
                             int appointmentId = reader.GetInt32(reader.GetOrdinal("appointment_id"));
 
-                            if (currentAppointment == null || currentAppointment.Id != appointmentId)
-                            {
-                                string staffSpecialty = reader.IsDBNull(reader.GetOrdinal("staff_specialty")) ? null : reader.GetString("staff_specialty");
-                                long appointmentUnixTimestamp = reader.GetInt64(reader.GetOrdinal("appointment_date"));
+                            long appointmentUnixTimestamp = reader.GetInt64(reader.GetOrdinal("appointment_date"));
 
-                                MedicalSpecialty specialty = MedicalSpecialty.Psychiatry;
-                                if (!string.IsNullOrEmpty(staffSpecialty))
-                                {
-                                    Enum.TryParse(staffSpecialty, out specialty);
-                                }
+                            // Category and Specialization mapping
+                            Category staffCategory = new Category(
+                                id: reader.GetInt32("staff_category_id"),
+                                description: reader.GetString("category_name")
+                            );
 
-                                ExamServices examServices = new ExamServices();
-                                List <Exam> exams = examServices.GetExamsByAppointmentId(appointmentId);
+                            Specialization staffSpecialization = new Specialization(
+                                  id: reader.GetInt32("staff_specialty_id"), // Use the correct column for the specialization ID
+            description: reader.GetString("staff_specialty")
+                            );
 
+                            // ExamService placeholder
+                            ExamServices examServices = new ExamServices();
+                            List<Exam> exams = examServices.GetExamsByAppointmentId(appointmentId);
 
-                                currentAppointment = new Appointment(
-                                    id: appointmentId,
-                                    dateAndTime: appointmentUnixTimestamp,
-                                    patient: new Patient(
-                                        id: reader.GetInt32("patient_id"),
-                                        name: reader.GetString("patient_name"),
-                                        mobilePhone: reader.GetString("patient_mobilePhone"),
-                                        gender: reader.GetChar("patient_gender")
-                                    ),
-                                    staff: new Staff(
-                                        id: reader.GetInt32("staff_id"),
-                                        name: reader.GetString("staff_name"),
-                                        mobilePhone: reader.GetString("staff_mobilePhone"),
-                                        gender: reader.GetChar("staff_gender"),
-                                        category: Category.Doctor,
-                                        specialty: specialty
-                                    )
-                                );
+                            // Construct Appointment
+                            Appointment appointment = new Appointment(
+                                id: appointmentId,
+                                dateAndTime: appointmentUnixTimestamp,
+                                patient: new Patient(
+                                    id: reader.GetInt32("patient_id"),
+                                    name: reader.GetString("patient_name"),
+                                    mobilePhone: reader.GetString("patient_mobilePhone"),
+                                    gender: reader.GetChar("patient_gender")
+                                ),
+                                staff: new Staff(
+                                    id: reader.GetInt32("staff_id"),
+                                    name: reader.GetString("staff_name"),
+                                    mobilePhone: reader.GetString("staff_mobilePhone"),
+                                    gender: reader.GetChar("staff_gender"),
+                                    category: staffCategory,
+                                    specialty: staffSpecialization
+                                )
+                            );
 
-
-                                appointments.Add(currentAppointment);
-                            }
+                            appointments.Add(appointment);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error fetching appointments: {ex.Message}");
+                Log("GetAllAppointments", ex.Message);
             }
 
             return appointments;
@@ -192,28 +197,32 @@ namespace Gestao_Centro_Saude.repository
                     connection.Open();
 
                     string query = @"
-                SELECT 
-                    a.id AS appointment_id, 
-                    a.date AS appointment_date,
-                    a.additional_details AS additional_details,  -- Fetch the new column
+            SELECT 
+                a.id AS appointment_id, 
+                a.date AS appointment_date,
+                a.additional_details AS additional_details,
+                s.category_id AS staff_category_id, 
+                c.name AS category_name, 
+                sp.description AS staff_specialty,
+                sp.id AS staff_specialty_id,
 
-                    p.id AS patient_id, 
-                    s.id AS staff_id, 
-                    sp.description AS staff_specialty,
-                    pu.name AS patient_name, 
-                    pu.mobile_phone AS patient_mobilePhone, 
-                    pu.gender AS patient_gender,
-                    su.name AS staff_name, 
-                    su.mobile_phone AS staff_mobilePhone, 
-                    su.gender AS staff_gender
-                FROM Appointment a
-                JOIN Patient p ON a.idPatient = p.id
-                JOIN Staff s ON a.idStaff = s.id
-                JOIN Specialization sp ON s.idSpecialization = sp.id
-                JOIN User pu ON p.id = pu.id  -- Join to get Patient info from User table
-                JOIN User su ON s.id = su.id  -- Join to get Staff info from User table
-                WHERE " + "pu.id = @userId" + @"
-                ORDER BY a.date DESC;";
+                p.id AS patient_id, 
+                pu.name AS patient_name, 
+                pu.mobile_phone AS patient_mobilePhone, 
+                pu.gender AS patient_gender,
+                s.id AS staff_id, 
+                su.name AS staff_name, 
+                su.mobile_phone AS staff_mobilePhone, 
+                su.gender AS staff_gender
+            FROM Appointment a
+            JOIN Patient p ON a.idPatient = p.id
+            JOIN Staff s ON a.idStaff = s.id
+            JOIN Category c ON s.category_id = c.id
+            JOIN Specialization sp ON s.idSpecialization = sp.id
+            JOIN User pu ON p.id = pu.id
+            JOIN User su ON s.id = su.id
+            WHERE pu.id = @userId
+            ORDER BY a.date DESC;";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
@@ -221,47 +230,48 @@ namespace Gestao_Centro_Saude.repository
 
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            Appointment currentAppointment = null;
-
                             while (reader.Read())
                             {
                                 int appointmentId = reader.GetInt32(reader.GetOrdinal("appointment_id"));
 
-                                if (currentAppointment == null || currentAppointment.Id != appointmentId)
-                                {
-                                    string staffSpecialty = reader.IsDBNull(reader.GetOrdinal("staff_specialty")) ? null : reader.GetString("staff_specialty");
-                                    long appointmentUnixTimestamp = reader.GetInt64(reader.GetOrdinal("appointment_date"));
+                                long appointmentUnixTimestamp = reader.GetInt64(reader.GetOrdinal("appointment_date"));
 
-                                    MedicalSpecialty specialty = MedicalSpecialty.Psychiatry;
-                                    if (!string.IsNullOrEmpty(staffSpecialty))
-                                    {
-                                        Enum.TryParse(staffSpecialty, out specialty);
-                                    }
+                                // Category and Specialization mapping
+                                Category staffCategory = new Category(
+                                    id: reader.GetInt32("staff_category_id"),
+                                    description: reader.GetString("category_name")
+                                );
 
-                                    ExamServices examServices = new ExamServices();
-                                    List<Exam> exams = examServices.GetExamsByAppointmentId(appointmentId);
+                                Specialization staffSpecialization = new Specialization(
+                                    id: reader.GetInt32("staff_specialty_id"), 
+                                    description: reader.GetString("staff_specialty")
+                                );
 
-                                    currentAppointment = new Appointment(
-                                        id: appointmentId,
-                                        dateAndTime: appointmentUnixTimestamp,
-                                        patient: new Patient(
-                                            id: reader.GetInt32("patient_id"),
-                                            name: reader.GetString("patient_name"),
-                                            mobilePhone: reader.GetString("patient_mobilePhone"),
-                                            gender: reader.GetChar("patient_gender")
-                                        ),
-                                        staff: new Staff(
-                                            id: reader.GetInt32("staff_id"),
-                                            name: reader.GetString("staff_name"),
-                                            mobilePhone: reader.GetString("staff_mobilePhone"),
-                                            gender: reader.GetChar("staff_gender"),
-                                            category: Category.Doctor,
-                                            specialty: specialty
-                                        )
-                                    );
+                                // ExamService placeholder
+                                ExamServices examServices = new ExamServices();
+                                List<Exam> exams = examServices.GetExamsByAppointmentId(appointmentId);
 
-                                    appointments.Add(currentAppointment);
-                                }
+                                // Construct Appointment
+                                Appointment appointment = new Appointment(
+                                    id: appointmentId,
+                                    dateAndTime: appointmentUnixTimestamp,
+                                    patient: new Patient(
+                                        id: reader.GetInt32("patient_id"),
+                                        name: reader.GetString("patient_name"),
+                                        mobilePhone: reader.GetString("patient_mobilePhone"),
+                                        gender: reader.GetChar("patient_gender")
+                                    ),
+                                    staff: new Staff(
+                                        id: reader.GetInt32("staff_id"),
+                                        name: reader.GetString("staff_name"),
+                                        mobilePhone: reader.GetString("staff_mobilePhone"),
+                                        gender: reader.GetChar("staff_gender"),
+                                        category: staffCategory,
+                                        specialty: staffSpecialization
+                                    )
+                                );
+
+                                appointments.Add(appointment);
                             }
                         }
                     }
@@ -269,12 +279,16 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error fetching appointments: {ex.Message}");
+                Log("GetAppointmentsByUserId", ex.Message);
             }
 
             return appointments;
         }
 
 
+        public void Log(string tag, string message)
+        {
+            Debug.WriteLine(tag, message);
+        }
     }
 }

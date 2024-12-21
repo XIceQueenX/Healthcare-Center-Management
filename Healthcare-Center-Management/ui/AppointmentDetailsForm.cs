@@ -20,7 +20,7 @@ namespace Gestao_Centro_Saude.ui
             labelPatientName.Text = _appointment.Patient.Name;
             labelPatientMobile.Text = $"Mobile Phone: {_appointment.Patient.Mobile_Phone}";
             labelPatientGender.Text = $"Gender:{_appointment.Patient.Gender.ToString()}";
-            labelStaffName.Text = $"Doctor: {_appointment.Staff.Name} - \t\t\t\t {_appointment.Staff.Specialty.ToString()}";
+            labelStaffName.Text = $"Doctor: {_appointment.Staff.Name} - \t\t\t\t {_appointment.Staff.speciality.Description}";
 
 
             var allExams = examServices.GetAllExams();

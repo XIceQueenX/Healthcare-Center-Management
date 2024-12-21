@@ -23,7 +23,7 @@ namespace Gestao_Centro_Saude.models
             Staff = staff ?? throw new ArgumentNullException(nameof(staff));
             AdditionalDetails = additionalDetails;
         }
-
+                
         public DateTime GetDateAndTimeAsDateTime()
             => DateTimeOffset.FromUnixTimeSeconds(DateAndTime).UtcDateTime;
 

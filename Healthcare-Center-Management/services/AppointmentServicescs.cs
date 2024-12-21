@@ -35,7 +35,7 @@ namespace Gestao_Centro_Saude.services
 
         public List<Appointment> GetAppointmentsByUserId(int id)
         {
-            return _appointmentRepository.GetAppointmentsByUserId( id);
+            return _appointmentRepository.GetAppointmentsByUserId(id);
         }
         
     }

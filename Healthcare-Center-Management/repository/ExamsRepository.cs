@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.repository
 {
-    internal class ExamsRepository : DatabaseConfig
+    internal class ExamsRepository : DatabaseConfig, ILogger
     {
+        string TAG = "ExamsRepository";
 
         public List<Exam> GetAllExams()
         {
@@ -41,7 +42,7 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error fetching exams: {ex.Message}");
+                Log(TAG, ex.Message);
             }
 
             return exams;
@@ -88,7 +89,7 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error saving exam: {ex.Message}");
+                Log(TAG, ex.Message);
             }
         }
 
@@ -119,7 +120,7 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error saving exam for patient: {ex.Message}");
+                Log(TAG, ex.Message);
                 return false;
             }
         }
@@ -229,10 +230,14 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception: {ex.Message}");
+                Log(TAG, ex.Message);
             }
             return userExams;
         }
 
+        public void Log(string tag, string message)
+        {
+           Console.WriteLine($"{tag} {message}");
+        }
     }
 }

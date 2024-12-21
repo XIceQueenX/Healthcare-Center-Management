@@ -4,8 +4,10 @@ using System.Diagnostics;
 
 namespace Gestao_Centro_Saude.repository
 {
-    internal class PatientRepository : DatabaseConfig
+    internal class PatientRepository : DatabaseConfig, ILogger
     {
+        string TAG = "PatientRepository";
+
         public Patient GetPatient(int id)
         {
             Patient patient = null;
@@ -41,7 +43,7 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception: {ex.Message}");
+                Log(TAG, ex.Message);
             }
 
             return patient;
@@ -87,7 +89,7 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception: {ex.Message}");
+                Log(TAG, ex.Message);
             }
 
             return patients;
@@ -126,10 +128,12 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception while inserting patient: {ex.Message}");
+                Log(TAG, ex.Message);
                 return false;
             }
         }
+
+      
 
         public bool UpdatePatient(Patient patient)
         {
@@ -160,9 +164,14 @@ namespace Gestao_Centro_Saude.repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Log(TAG, ex.Message);
                 return false;
             }
+        }
+
+        public void Log(string tag, string message)
+        {
+            Console.WriteLine($"{tag} {message}");
         }
 
     }

@@ -22,14 +22,11 @@ namespace Gestao_Centro_Saude.services
             return _staffRepository.GetAllSpecializations();
         }
 
-        public List<Staff> GetStaffBySpecialty(MedicalSpecialty specialty)
+        public List<Staff> GetStaffBySpecialty(int idSpeciality)
         {
-            return _staffRepository.GetStaffBySpecialty(specialty);
+            return _staffRepository.GetStaffBySpecialty(idSpeciality);
         }
 
-        public List<Staff> GetStaffBySpecialty(int specialtyId)
-        {
-            return _staffRepository.GetStaffBySpecialty(specialtyId);
-        }
+      
     }
 }

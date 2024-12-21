@@ -36,6 +36,7 @@
             button4 = new Button();
             grid = new DataGridView();
             label2 = new Label();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)grid).BeginInit();
             SuspendLayout();
             // 
@@ -142,12 +143,28 @@
             label2.TabIndex = 9;
             label2.Text = "Appointements of day";
             // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(214, 234, 248);
+            button2.FlatAppearance.BorderColor = Color.FromArgb(130, 236, 255);
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Trebuchet MS", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button2.Location = new Point(616, 467);
+            button2.Name = "button2";
+            button2.Size = new Size(174, 45);
+            button2.TabIndex = 10;
+            button2.Text = "STAFF";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
+            // 
             // Clients
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(232, 240, 242);
             ClientSize = new Size(816, 544);
+            Controls.Add(button2);
             Controls.Add(label2);
             Controls.Add(grid);
             Controls.Add(button4);
@@ -171,5 +188,6 @@
         private Button button4;
         private DataGridView grid;
         private Label label2;
+        private Button button2;
     }
 }

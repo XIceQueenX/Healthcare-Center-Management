@@ -54,5 +54,11 @@ namespace Gestao_Centro_Saude
             ListAllAppointments listAllAppointments = new ListAllAppointments();
             listAllAppointments.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AddStaff addStaff = new AddStaff();
+            addStaff.Show();
+        }
     }
 }
