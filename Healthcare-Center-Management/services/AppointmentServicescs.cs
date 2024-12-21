@@ -22,11 +22,6 @@ namespace Gestao_Centro_Saude.services
             return _appointmentRepository.InsertAppointment(appointment);
         }
 
-        public bool ScheduleAppointment(int staffId, int patientId, DateTime date)
-        {
-            return _appointmentRepository.ScheduleAppointment(staffId, patientId, date);
-        }
-
         public List<Appointment> GetAllAppointments()
         {
             return _appointmentRepository.GetAllAppointments();
@@ -37,6 +32,11 @@ namespace Gestao_Centro_Saude.services
         {
             return _appointmentRepository.GetAppointmentsByUserId(id);
         }
-        
+
+
+        public bool UpdateAdditionalDetails(int idAppointment, string additionalDetails)
+        {
+            return _appointmentRepository.UpdateAdditionalDetails(idAppointment, additionalDetails);
+        }
     }
 }

@@ -123,7 +123,6 @@
             Controls.Add(labelName);
             Name = "AddAppointment";
             Text = "AddAppointment";
-            Load += AddAppointment_Load;
             ResumeLayout(false);
             PerformLayout();
         }

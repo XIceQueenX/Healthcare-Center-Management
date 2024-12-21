@@ -26,7 +26,5 @@ namespace Gestao_Centro_Saude.services
         {
             return _staffRepository.GetStaffBySpecialty(idSpeciality);
         }
-
-      
     }
 }

@@ -17,7 +17,12 @@ namespace Gestao_Centro_Saude.ui
         {
             InitializeComponent();
             var repo = new StaffServices();
-           // comboBoxSpeciality.DataSource = repo.GetAllSpecializations();
+            // comboBoxSpeciality.DataSource = repo.GetAllSpecializations();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

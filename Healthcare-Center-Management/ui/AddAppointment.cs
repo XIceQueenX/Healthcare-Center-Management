@@ -1,12 +1,14 @@
 ﻿using Gestao_Centro_Saude.models;
 using Gestao_Centro_Saude.repository;
 using Gestao_Centro_Saude.services;
+using System.Windows.Forms;
 
 namespace Gestao_Centro_Saude.ui
 {
     public partial class AddAppointment : Form
     {
         private Patient currentPatient;
+
         private StaffServices staffServices = new StaffServices();
         private AppointmentServicescs appointmentServicescs = new AppointmentServicescs();
 
@@ -14,15 +16,19 @@ namespace Gestao_Centro_Saude.ui
         {
             InitializeComponent();
             currentPatient = patient;
+            SetupView();
         }
 
-        private void AddAppointment_Load(object sender, EventArgs e)
+        private void SetupView()
         {
             LoadSpecializations();
 
             comboBoxSpecialization.SelectedIndexChanged += ComboBoxSpecialization_SelectedIndexChanged;
 
             labelName.Text = currentPatient.Name;
+
+            dateTimePickerAppointment.MinDate = DateTime.Today;
+            dateTimePickerAppointment.MaxDate = DateTime.Today.AddMonths(6);
         }
 
         private void LoadSpecializations()
@@ -40,12 +46,10 @@ namespace Gestao_Centro_Saude.ui
             {
                 var staffList = staffServices.GetStaffBySpecialty(selectedSpecialization.Id);
 
-                comboStaff.DataSource = null;  
                 comboStaff.DataSource = staffList;
                 comboStaff.DisplayMember = "Name"; 
                 comboStaff.ValueMember = "Id";   
 
-                comboStaff.ResetBindings();
             }
             else
             {
@@ -77,7 +81,6 @@ namespace Gestao_Centro_Saude.ui
 
                 if (appointmentServicescs.InsertAppointment(newAppointment))
                 {
-                    MessageBox.Show("Appointment successfully created!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
                 else
@@ -89,11 +92,6 @@ namespace Gestao_Centro_Saude.ui
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void dataGridAddExam_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

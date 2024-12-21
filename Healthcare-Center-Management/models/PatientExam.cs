@@ -24,8 +24,5 @@ namespace Gestao_Centro_Saude.models
             Staff = staff;
             Diagnosis = diagnosis;
         }
-
-        PatientExam() { }
-
     }
 }

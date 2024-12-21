@@ -44,7 +44,6 @@
             patient_Name.Name = "patient_Name";
             patient_Name.Size = new Size(125, 27);
             patient_Name.TabIndex = 0;
-            patient_Name.TextChanged += patient_Name_TextChanged;
             // 
             // label1
             // 
@@ -54,7 +53,6 @@
             label1.Size = new Size(50, 20);
             label1.TabIndex = 1;
             label1.Text = "Nome";
-            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -127,7 +125,6 @@
             Name = "AddNewUser";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AddNewUser";
-            Load += AddNewUser_Load;
             ResumeLayout(false);
             PerformLayout();
         }

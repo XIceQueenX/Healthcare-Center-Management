@@ -4,7 +4,6 @@ namespace Gestao_Centro_Saude.models
 {
     public class Patient : User
     {
-        public Patient() { }
         public Patient(int id, string name, string mobilePhone, char gender)
            : base(id, name, mobilePhone, gender, new Category(1, "Pacient")) { }
 

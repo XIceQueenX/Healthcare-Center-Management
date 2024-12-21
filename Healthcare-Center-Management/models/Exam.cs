@@ -15,13 +15,6 @@ namespace Gestao_Centro_Saude.models
 
         public Exam() { }
 
-        public Exam(string name, string description, double cost)
-        {
-            Name = name;
-            Description = description;
-            Cost = cost;
-        }
-
         public Exam(int id, string name, string description, double cost)
         {
             Id = id;

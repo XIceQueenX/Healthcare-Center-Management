@@ -38,6 +38,10 @@
             button1 = new Button();
             textBox1 = new TextBox();
             label1 = new Label();
+            button2 = new Button();
+            Id = new DataGridViewTextBoxColumn();
+            ExamName = new DataGridViewTextBoxColumn();
+            Selected = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridAddExam).BeginInit();
             SuspendLayout();
             // 
@@ -98,6 +102,7 @@
             dataGridAddExam.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridAddExam.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridAddExam.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridAddExam.Columns.AddRange(new DataGridViewColumn[] { Id, ExamName, Selected });
             dataGridAddExam.Location = new Point(40, 244);
             dataGridAddExam.Name = "dataGridAddExam";
             dataGridAddExam.ReadOnly = true;
@@ -123,8 +128,9 @@
             textBox1.Location = new Point(40, 165);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(670, 60);
+            textBox1.Size = new Size(547, 60);
             textBox1.TabIndex = 16;
+            textBox1.Visible = false;
             // 
             // label1
             // 
@@ -135,11 +141,48 @@
             label1.TabIndex = 17;
             label1.Text = "Additional Details";
             // 
+            // button2
+            // 
+            button2.Location = new Point(593, 166);
+            button2.Name = "button2";
+            button2.Size = new Size(117, 59);
+            button2.TabIndex = 18;
+            button2.Text = "Save Details";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // Id
+            // 
+            Id.HeaderText = "Exam ID";
+            Id.MinimumWidth = 6;
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Width = 93;
+            // 
+            // ExamName
+            // 
+            ExamName.HeaderText = "Exam Name";
+            ExamName.MinimumWidth = 6;
+            ExamName.Name = "ExamName";
+            ExamName.ReadOnly = true;
+            ExamName.Width = 118;
+            // 
+            // Selected
+            // 
+            Selected.HeaderText = "Select Exam";
+            Selected.MinimumWidth = 6;
+            Selected.Name = "Selected";
+            Selected.ReadOnly = true;
+            Selected.Resizable = DataGridViewTriState.True;
+            Selected.SortMode = DataGridViewColumnSortMode.Automatic;
+            Selected.Width = 118;
+            // 
             // AppointmentDetailsForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button2);
             Controls.Add(label1);
             Controls.Add(textBox1);
             Controls.Add(button1);
@@ -168,5 +211,9 @@
         private Button button1;
         private TextBox textBox1;
         private Label label1;
+        private Button button2;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn ExamName;
+        private DataGridViewCheckBoxColumn Selected;
     }
 }

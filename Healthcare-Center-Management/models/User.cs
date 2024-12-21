@@ -37,14 +37,6 @@ namespace Gestao_Centro_Saude.models
             Category = category;
         }
 
-        public User( string name, string mobilePhone, char gender, Category category)
-        {
-            Name = name;
-            Mobile_Phone = mobilePhone;
-            Gender = gender;
-            Category = category;
-        }
-
-        public User() { }
+       
     }
 }

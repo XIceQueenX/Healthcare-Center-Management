@@ -22,10 +22,6 @@ namespace Gestao_Centro_Saude.services
             return _examRepository.GetAllExams();
         }
 
-        public void SaveExam(int examId, int patientId, int specialtyId, DateTime date)
-        {
-             _examRepository.SaveExam(examId, patientId, specialtyId, date);
-        }
 
         public bool SaveExamForPatient(int patientId, int examId, int doctorId, int appointmentId, DateTime examDate)
         {
