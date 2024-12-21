@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.repository
 {
+    /// <summary>
+    /// Class the holds to logic to communicate with db
+    /// </summary>
     internal class ExamsRepository : DatabaseConfig, ILogger
     {
         string TAG = "ExamsRepository";

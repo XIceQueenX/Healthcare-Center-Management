@@ -19,7 +19,6 @@ namespace Gestao_Centro_Saude.ui
         {
             InitializeComponent();
             grid.DataSource = patientServices.GetPatients();
-
         }
 
         private void onClickGridCell(object sender, DataGridViewCellEventArgs e)

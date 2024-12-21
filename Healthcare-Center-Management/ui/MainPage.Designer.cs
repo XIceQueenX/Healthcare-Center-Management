@@ -132,6 +132,7 @@
             grid.Size = new Size(690, 333);
             grid.TabIndex = 8;
             grid.CellClick += onClickGridCell;
+            grid.CellContentClick += grid_CellContentClick;
             // 
             // label2
             // 

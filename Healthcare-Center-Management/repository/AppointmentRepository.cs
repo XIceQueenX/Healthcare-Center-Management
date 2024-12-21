@@ -11,10 +11,18 @@ using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.repository
 {
+    /// <summary>
+    /// Class the manage the sql apppoitmnent part
+    /// </summary>
     internal class AppointmentRepository : DatabaseConfig, ILogger
     {
-
         string TAG = "AppointmentRepo";
+
+        /// <summary>
+        /// Insert a new appointment into db
+        /// </summary>
+        /// <param name="appointment"></param>
+        /// <returns></returns>
         public bool InsertAppointment(Appointment appointment)
         {
             try
@@ -43,6 +51,13 @@ namespace Gestao_Centro_Saude.repository
                 return false;
             }
         }
+
+        /// <summary>
+        /// Update the addiotinal field of appointments
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <param name="newDetails"></param>
+        /// <returns></returns>
         public bool UpdateAdditionalDetails(int appointmentId, string newDetails)
         {
             bool success = false;
@@ -77,55 +92,10 @@ namespace Gestao_Centro_Saude.repository
             return false;
         }
 
-
-        public bool ScheduleAppointment(int staffId, int patientId, DateTime date)
-        {
-            try
-            {
-                using (MySqlConnection connection = CreateConnection())
-                {
-                    connection.Open();
-
-                    string checkQuery = @"SELECT COUNT(*) 
-                                  FROM Appointment 
-                                  WHERE idStaff = @staffId 
-                                  AND idPatient = @patientId 
-                                  AND date = @date";
-
-                    MySqlCommand checkCommand = new MySqlCommand(checkQuery, connection);
-                    checkCommand.Parameters.AddWithValue("@staffId", staffId);
-                    checkCommand.Parameters.AddWithValue("@patientId", patientId);
-                    checkCommand.Parameters.AddWithValue("@date", date);
-
-                    int existingCount = Convert.ToInt32(checkCommand.ExecuteScalar());
-
-                    if (existingCount > 0)
-                    {
-                        Console.WriteLine("Appointment already exists for this staff, patient, and date.");
-                        return false;
-                    }
-
-                    string insertQuery = @"INSERT INTO Appointment (idStaff, idPatient, date) 
-                                   VALUES (@staffId, @patientId, @date)";
-
-                    MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection);
-                    insertCommand.Parameters.AddWithValue("@staffId", staffId);
-                    insertCommand.Parameters.AddWithValue("@patientId", patientId);
-                    insertCommand.Parameters.AddWithValue("@date", date.ToString("yyyy-MM-dd"));
-
-                    int rowsAffected = insertCommand.ExecuteNonQuery();
-
-                    return rowsAffected > 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                Log(TAG, ex.Message);
-                return false;
-            }
-        }
-
-
+        /// <summary>
+        /// List all appointment in db
+        /// </summary>
+        /// <returns></returns>
         public List<Appointment> GetAllAppointments()
         {
             List<Appointment> appointments = new List<Appointment>();
@@ -208,6 +178,12 @@ namespace Gestao_Centro_Saude.repository
             return appointments;
         }
 
+
+        /// <summary>
+        /// Get apppointments by user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public List<Appointment> GetAppointmentsByUserId(int userId)
         {
             List<Appointment> appointments = new List<Appointment>();
@@ -295,10 +271,10 @@ namespace Gestao_Centro_Saude.repository
             return appointments;
         }
 
-      
+
         public void Log(string tag, string message)
         {
-            Debug.WriteLine(tag, message);
+            Debug.WriteLine(message, tag);
         }
     }
 }

@@ -9,9 +9,19 @@ using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.repository
 {
+
+    /// <summary>
+    /// Class the holds to logic to communicate with db
+    /// </summary>
     internal class StaffRepository : DatabaseConfig, ILogger
     {
         string TAG = "StaffRepository";
+
+
+        /// <summary>
+        /// Get all specialization on db
+        /// </summary>
+        /// <returns></returns>
         public List<Specialization> GetAllSpecializations()
         {
             List<Specialization> specializations = new List<Specialization>();
@@ -46,7 +56,11 @@ namespace Gestao_Centro_Saude.repository
             return specializations;
         }
 
-
+        /// <summary>
+        /// Get a staff speciality
+        /// </summary>
+        /// <param name="specialtyId"></param>
+        /// <returns></returns>
         public List<Staff> GetStaffBySpecialty(int specialtyId)
         {
             List<Staff> staffList = new List<Staff>();
@@ -118,8 +132,11 @@ u.mobile_phone,
             return staffList;
         }
 
-
-
+        /// <summary>
+        /// Print in debug the output
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="message"></param>
         public void Log(string tag, string message)
         {
             Debug.WriteLine($"{tag} {message}");

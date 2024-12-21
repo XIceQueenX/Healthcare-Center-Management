@@ -16,17 +16,30 @@ namespace Gestao_Centro_Saude
     {
 
         PatientServices patientServices = new PatientServices();
+        /// <summary>
+        /// Instantieta the form
+        /// </summary>
         public Clients()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Open a new form that shows all the patients
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             ListAllPatients listAllPatients = new ListAllPatients();
             listAllPatients.Show();
         }
 
+        /// <summary>
+        /// Load the patients to the grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Clients_Load(object sender, EventArgs e)
         {
             grid.DataSource = patientServices.GetPatients();
@@ -59,6 +72,11 @@ namespace Gestao_Centro_Saude
         {
             AddStaff addStaff = new AddStaff();
             addStaff.Show();
+        }
+
+        private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

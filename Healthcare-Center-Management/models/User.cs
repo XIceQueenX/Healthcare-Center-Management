@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.models
 {
-
-
+    /// <summary>
+    /// User ckass
+    /// </summary>
     public class User
     {
+        /// <summary>
+        /// Properties
+        /// </summary>
         private char gender;
         private string mobile_phone;
 
@@ -28,6 +32,15 @@ namespace Gestao_Centro_Saude.models
         }
         public Category Category { get; set; }
 
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="mobilePhone"></param>
+        /// <param name="gender"></param>
+        /// <param name="category"></param>
         public User(int id, string name, string mobilePhone, char gender, Category category)
         {
             Id = id;

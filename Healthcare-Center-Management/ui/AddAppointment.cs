@@ -12,6 +12,10 @@ namespace Gestao_Centro_Saude.ui
         private StaffServices staffServices = new StaffServices();
         private AppointmentServicescs appointmentServicescs = new AppointmentServicescs();
 
+        /// <summary>
+        /// Initialize the view
+        /// </summary>
+        /// <param name="patient"></param>
         public AddAppointment(Patient patient)
         {
             InitializeComponent();
@@ -19,6 +23,9 @@ namespace Gestao_Centro_Saude.ui
             SetupView();
         }
 
+        /// <summary>
+        /// Setup the content
+        /// </summary>
         private void SetupView()
         {
             LoadSpecializations();
@@ -56,7 +63,6 @@ namespace Gestao_Centro_Saude.ui
                 comboStaff.DataSource = null;
             }
         }
-
 
         private void button1_Click(object sender, EventArgs e)
         {

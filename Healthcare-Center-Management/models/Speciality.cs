@@ -6,10 +6,22 @@ using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.models
 {
-     public class Specialization
+    /// <summary>
+    /// Specialization Class
+    /// </summary>
+    public class Specialization
     {
-        public int Id { get; set; } 
-        public string Description { get; set; } 
+        /// <summary>
+        /// Properites
+        /// </summary>
+        public int Id { get; set; }
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="description"></param>
         public Specialization(int id, string description)
         {
             Id = id;

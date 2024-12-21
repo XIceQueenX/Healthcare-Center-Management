@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Gestao_Centro_Saude.services
 {
+    /// <summary>
+    /// Class resposible for call the method of db (Same method of repositories, but only them assignature
+    /// </summary>
     public class PatientServices
     {
         private readonly PatientRepository _patientRepository;

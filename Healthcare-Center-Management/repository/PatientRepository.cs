@@ -4,10 +4,20 @@ using System.Diagnostics;
 
 namespace Gestao_Centro_Saude.repository
 {
+
+    /// <summary>
+    /// Class the holds to logic to communicate with db
+    /// </summary>
     internal class PatientRepository : DatabaseConfig, ILogger
     {
         string TAG = "PatientRepository";
 
+
+        /// <summary>
+        /// GEt a patient by his id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Patient GetPatient(int id)
         {
             Patient patient = null;
@@ -50,7 +60,10 @@ namespace Gestao_Centro_Saude.repository
         }
 
 
-
+        /// <summary>
+        /// Get All Pacients
+        /// </summary>
+        /// <returns></returns>
         public List<Patient> GetPatients()
         {
             List<Patient> patients = new List<Patient>();
@@ -96,6 +109,7 @@ namespace Gestao_Centro_Saude.repository
 
         }
 
+        //Add new Patients do DB
         public bool InsertPatient(Patient patient)
         {
             try
@@ -133,8 +147,7 @@ namespace Gestao_Centro_Saude.repository
             }
         }
 
-      
-
+        //Update pateint info
         public bool UpdatePatient(Patient patient)
         {
             try
@@ -169,9 +182,14 @@ namespace Gestao_Centro_Saude.repository
             }
         }
 
+        /// <summary>
+        /// Print out the output on debug
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="message"></param>
         public void Log(string tag, string message)
         {
-            Console.WriteLine($"{tag} {message}");
+            Debug.WriteLine($"{tag} {message}");
         }
 
     }
